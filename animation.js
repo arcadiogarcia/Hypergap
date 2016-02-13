@@ -89,6 +89,9 @@ function draw() {
 
     drawTitle(t);
     exittimer++;
+    if(exittimer>150){
+        window.location="menu.html";
+    }
     requestAnimationFrame(draw);
 }
 draw();
@@ -99,7 +102,7 @@ function drawGAP(p) {
     context.beginPath();
     var p0 = p.shift();
     if (exit === true) {
-        var cx = width * 0.63, cy = height * 0.7;
+        var cx = width * 0.625, cy = height * 0.7;
         var scale = Math.pow(1.05, exittimer) / 20 + 1;
         context.moveTo(((width * p0.x) - cx) * scale + cx, ((height * p0.y) - cy) * scale + cy);
         p.forEach(function (x) { context.lineTo(((width * x.x) - cx) * scale + cx, ((height * x.y) - cy) * scale + cy); });
@@ -109,6 +112,9 @@ function drawGAP(p) {
     }
     context.closePath();
     context.fill();
+    context.strokeStyle="#111";
+    context.lineWidth=2;
+    context.stroke();
 };
 
 
