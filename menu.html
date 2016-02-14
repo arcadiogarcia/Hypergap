@@ -1,11 +1,45 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-
+<link rel="stylesheet" type="text/css" href="winjs/css/ui-dark.css">
+<link rel="stylesheet" type="text/css" href="css/menu.css">
+<script src="winjs/js/base.js"></script>
+<script src="winjs/js/ui.js"></script>
+<script src="js/menu.js"></script>
 </head>
 
-<body style="margin:0px;overflow:hidden;background:black;color:white;">
-    hey
+<body>
+   
+<!-- Simple template for the ListView instantiation  -->
+<div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="smallListIconTextItem" data-win-bind="style['background-color']: color">
+        <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: picture" />
+        <div class="smallListIconTextItem-Detail">
+            <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+            <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+        </div>
+    </div>
+</div>
+
+<!-- The declarative markup necesary for ListView instantiation -->
+<!-- Call WinJS.UI.processAll() in your initialization code -->
+<div id="listView"
+     class="win-selectionstylefilled"
+     data-win-control="WinJS.UI.ListView"
+     data-win-options="{
+            itemDataSource: Sample.ListView.data.dataSource,
+            itemTemplate: select('.smallListIconTextTemplate'),
+            selectionMode: 'none',
+            tapBehavior: 'none',
+            itemsReorderable:true,
+            layout: { type: WinJS.UI.GridLayout }
+    }">
+</div>
+
+
+   
+   
 </body>
 
 </html>

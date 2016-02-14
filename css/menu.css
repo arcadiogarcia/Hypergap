@@ -1,0 +1,52 @@
+#listView
+{
+    width: 100%;
+}
+
+/* Template for the items in the ListViews in this sample */       
+.smallListIconTextItem
+{
+    width: 250px;
+    height: 250px;
+    background-color:#444;
+    padding: 5px;
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    animation: tileAppear 1s;
+}
+
+    .smallListIconTextItem img.smallListIconTextItem-Image 
+    {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        margin-right:20px;
+    }
+
+    .smallListIconTextItem .smallListIconTextItem-Detail
+    {
+        margin: 5px;
+    }
+
+   .listLayoutTopHeaderTemplateRoot {
+        font-size: larger;
+        margin-left: 16px;
+    }
+    
+/* CSS applied to the ListViews in this sample */
+#listView
+{
+    height: 100%;
+}
+
+.win-itembox{
+    height:auto;
+}
+
+@keyframes tileAppear{
+    0%{opacity:0;transform: scaleX(0.2) scaleY(0.2);}
+    80%{opacity:1;transform: scaleX(1.1) scaleY(1.1);}
+    100%{opacity:1;transform: none;}
+}
