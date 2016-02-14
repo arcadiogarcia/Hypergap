@@ -193,7 +193,7 @@ function drawTitle(t) {
         context.textBaseline = "middle";
         var x1 = width / 2 - 30, x2 = width / 2 + 80, y1 = height / 2 - 100, y2 = height / 2 - 40;
         if (exit === true) {
-            var cx = width * 0.62, cy = height * 0.44;
+            var cx = width * 0.5+150, cy = height * 0.5-40;
             var scale = Math.pow(1.2, exittimer) / 20 + 1;
             x1 = (x1 - cx) * scale + cx;
             y1 = (y1 - cy) * scale + cy;
