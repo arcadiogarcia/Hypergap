@@ -91,6 +91,7 @@ function draw() {
     exittimer++;
     if(exittimer>150){
         window.location="menu.html";
+        return;
     }
     requestAnimationFrame(draw);
 }
