@@ -13,7 +13,9 @@ var tiles=[];
 WinJS.Namespace.define("Sample.ListView", {
     data: new WinJS.Binding.List(tiles)
 });
-WinJS.UI.processAll();
+WinJS.UI.processAll().then(function () {
+    document.getElementById("listView").winControl.addEventListener("iteminvoked", clickTile);
+});
 
 
 var itemArrayCopy=itemArray.map(function(x){return x});
@@ -27,13 +29,10 @@ function addTile(){
 
 addTile();
 
-function keydownTile(e){
-    alert(e);
-}
-
-function clickTile(e){
-    var l=itemArray.filter(function(x){return x.tileId==e});
+function clickTile(e) {
+    var l=itemArray.filter(function(x){return x.tileId==e.detail.itemIndex});
     if(l.length>0 && l[0].action){
         l[0].action()
     }
 }
+
