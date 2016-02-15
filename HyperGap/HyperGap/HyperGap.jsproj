@@ -72,7 +72,12 @@
     <Content Include="js\animation.js" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\deflate.js" />
+    <Content Include="js\hypergap_apps.js" />
+    <Content Include="js\inflate.js" />
     <Content Include="js\menu.js" />
+    <Content Include="js\z-worker.js" />
+    <Content Include="js\zip.js" />
     <Content Include="menu.html" />
     <Content Include="splash.html" />
     <Content Include="WinJS\css\ui-dark.css" />
