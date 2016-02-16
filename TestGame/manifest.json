@@ -1,0 +1,20 @@
+{
+    "name": "TestGame",
+    "scope": "TestGameFiles",
+    "presets": [
+        "presets.js"
+    ],
+    "levels": [
+        "levels.xml"
+    ],
+    "spritesheets":[
+        "spritesheets.xml"
+    ],
+    "screenResolution": {
+        "w": 1366,
+        "h": 768
+    },
+    "externalCode":[],
+    "dependencies": [],
+    "theme_color":"red"
+}

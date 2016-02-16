@@ -3,12 +3,13 @@ var itemArray = [
     { title: "Paradux", text: "Puzzle", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#530" },
     { title: "Another game", text: "?", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#a00" },
     { title: "JSonic the Edgehog", text: "Platformer", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#3ac" },
-{ title: "Install game", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { installGameFromLocaFile(); } },
+{ title: "Install game", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { HYPERGAP.apps.installGameFromLocaFile(); } },
 { title: "Reboot", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { location = "splash.html" } },
 ];
 
 itemArray.forEach(function (x, id) { x.tileId = id });
 
+itemArray = itemArray.concat(HYPERGAP.apps.getInstalledApps().map(function (x) { return {title:x.name, text:"Installed app", color:x.theme_color,action:function(){alert(x.scope)}} }));
 
 var tiles = [];
 WinJS.Namespace.define("Sample.ListView", {
@@ -20,6 +21,8 @@ WinJS.UI.processAll().then(function () {
 
 
 var itemArrayCopy = itemArray.map(function (x) { return x });
+
+var installedApps = HYPERGAP.apps.getInstalledApps();
 
 function addTile() {
     if (itemArrayCopy.length > 0) {

@@ -1,6 +1,11 @@
-﻿zip.workerScriptsPath = "/js/";
+﻿var HYPERGAP = HYPERGAP || {};
 
-function installGameFromLocaFile() {
+HYPERGAP.apps = {};
+
+
+zip.workerScriptsPath = "/js/";
+
+HYPERGAP.apps.installGameFromLocaFile = function () {
     // Create the picker object and set options
     var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
     openPicker.viewMode = Windows.Storage.Pickers.PickerViewMode.list;
@@ -31,6 +36,7 @@ function installGameFromLocaFile() {
                         // text contains the entry data as a String
                         var manifestData = JSON.parse(text);
                         console.log(manifestData);
+                        HYPERGAP.apps.addInstalledApp(manifestData);
 
                         // close the zip reader
                         reader.close(function () {
@@ -48,4 +54,15 @@ function installGameFromLocaFile() {
         });
     });
 
+}
+
+
+HYPERGAP.apps.getInstalledApps = function () {
+    return JSON.parse(localStorage.installedApps || "[]");
+}
+
+HYPERGAP.apps.addInstalledApp = function (app) {
+    var apps = HYPERGAP.apps.getInstalledApps();
+    apps.push(app);
+    localStorage.installedApps = JSON.stringify(apps);
 }
