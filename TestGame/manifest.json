@@ -16,5 +16,6 @@
     },
     "externalCode":[],
     "dependencies": [],
-    "theme_color":"red"
+    "theme_color":"red",
+    "tileIcon":"tileIcon.png"
 }

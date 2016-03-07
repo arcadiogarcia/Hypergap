@@ -3,4 +3,9 @@
   <PropertyGroup>
     <ReferenceCachePath>C:\Users\49pym\AppData\Local\Temp\HyperGap_refcache</ReferenceCachePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>AppHostLocalDebugger</DebuggerFlavor>
+    <MachineName>192.168.1.38</MachineName>
+    <RequireAuthentication>Universal</RequireAuthentication>
+  </PropertyGroup>
 </Project>

@@ -9,7 +9,7 @@ var itemArray = [
 
 itemArray.forEach(function (x, id) { x.tileId = id });
 
-itemArray = itemArray.concat(HYPERGAP.apps.getInstalledApps().map(function (x) { return {title:x.name, text:"Installed app", color:x.theme_color,action:function(){alert(x.scope)}} }));
+itemArray = itemArray.concat(HYPERGAP.apps.getInstalledApps().map(function (x) { return { title: x.name, text: "Installed app", picture: "ms-appdata:///local/installedApps/" + x.name + "/" + x.scope + "/" + x.tileIcon, color: x.theme_color, action: function () { alert(x.scope) } } }));
 
 var tiles = [];
 WinJS.Namespace.define("Sample.ListView", {
