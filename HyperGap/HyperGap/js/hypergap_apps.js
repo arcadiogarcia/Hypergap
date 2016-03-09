@@ -129,6 +129,14 @@ HYPERGAP.apps.addInstalledApp = function (app) {
     localStorage.installedApps = JSON.stringify(apps);
 }
 
+HYPERGAP.apps.launchApp = function (name) {
+    var manifest=HYPERGAP.apps.getInstalledApps().filter(x=>x.name == name)[0];
+    localStorage.currentAppName=manifest.name;
+    localStorage.currentAppScope = manifest.scope;
+    localStorage.currentAppManifest= JSON.stringify(manifest);
+    window.location = "game.html";
+};
+
 Array.prototype.recursiveForEach = function (action, index) {
     var i = index || 0;
     if (i >= this.length) {

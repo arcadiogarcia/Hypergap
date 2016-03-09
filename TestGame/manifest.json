@@ -11,11 +11,13 @@
         "spritesheets.xml"
     ],
     "screenResolution": {
-        "w": 1366,
-        "h": 768
+        "w": 800,
+        "h": 400
     },
     "externalCode":[],
     "dependencies": [],
     "theme_color":"red",
-    "tileIcon":"tileIcon.png"
+    "tileIcon":"tileIcon.png",
+    "enginefps": 60,
+    "animationfps": 60
 }
