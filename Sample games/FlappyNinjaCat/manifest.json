@@ -1,6 +1,6 @@
 {
-    "name": "TestGame",
-    "scope": "TestGameFiles",
+    "name": "Flappy Ninja Cat",
+    "scope": "gamefiles",
     "presets": [
         "presets.js"
     ],
@@ -19,7 +19,8 @@
         "presets":["mouse","storage","notificationManager"],
         "collisions":["pointsAndBoxes"]
     },
-    "theme_color":"red",
+    "themeColor":"#4B5",
+    "backgroundColor":"#333",
     "tileIcon":"tileIcon.png",
     "enginefps": 60,
     "animationfps": 60

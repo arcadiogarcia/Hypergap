@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+  <spritesheets>
+    <spritesheet name="background" src="images/background.png">
+
+      <states>
+        <state name="moving">
+          <layer name="moving"></layer>
+        </state>
+        <state name="idle">
+          <layer name="idle"></layer>
+        </state>
+      </states>
+
+      <layers>
+        <layer name="moving" x="-(t/10%800)" y="0">
+          <frame name="idle"></frame>
+        </layer>
+        <layer name="idle" x="0" y="0">
+          <frame name="idle"></frame>
+        </layer>
+      </layers>
+
+      <frames>
+        <frame name="idle" x="0" y="0" w="1600" h="400" t="0"></frame>
+
+      </frames>
+
+    </spritesheet>
+
+    <spritesheet name="pipe" src="images/pipe.png">
+
+      <states>
+        <state name="normal">
+          <layer name="Idle1"></layer>
+        </state>
+        <state name="reverse" flip="v">
+          <layer name="Idle1"></layer>
+        </state>
+      </states>
+
+      <layers>
+        <layer name="Idle1" x="0" y="0">
+          <frame name="I1"></frame>
+        </layer>
+      </layers>
+
+      <frames>
+        <frame name="I1" x="0" y="0" w="100" h="300" t="0"></frame>
+
+      </frames>
+
+    </spritesheet>
+    
+     <spritesheet name="button" src="images/button.png">
+
+      <states>
+        <state name="normal">
+          <layer name="Idle1"></layer>
+        </state>
+      </states>
+
+      <layers>
+        <layer name="Idle1" x="0" y="0">
+          <frame name="I1"></frame>
+        </layer>
+      </layers>
+
+      <frames>
+        <frame name="I1" x="0" y="0" w="200" h="100" t="0"></frame>
+
+      </frames>
+
+    </spritesheet>
+
+    <spritesheet name="title" src="images/title.png">
+
+      <states>
+        <state name="normal">
+          <layer name="Idle1"></layer>
+        </state>
+      </states>
+
+      <layers>
+        <layer name="Idle1" x="0" y="0">
+          <frame name="I1"></frame>
+        </layer>
+      </layers>
+
+      <frames>
+        <frame name="I1" x="0" y="0" w="400" h="250" t="100"></frame>
+
+      </frames>
+
+    </spritesheet>
+    
+    
+
+    <spritesheet name="text">
+
+      <states>
+        <state name="normal">
+          <layer name="Idle1"></layer>
+        </state>
+      </states>
+
+      <layers>
+        <layer name="Idle1" x="0" y="0">
+          <frame name="Text"></frame>
+        </layer>
+      </layers>
+
+      <frames>
+        <frame name="Text" code="context.textBaseline ='top';context.textAlign='start';context.font='20pt Verdana';context.fillStyle = vars['$color'];context.fillText(vars['$text'],x,y);" t="0"></frame>
+      </frames>
+
+    </spritesheet>
+
+    <spritesheet name="paradog" src="images/ninjacat.png">
+
+      <states>
+
+        <state name="RunR">
+          <layer name="Run1"></layer>
+        </state>
+
+        <state name="BarkR">
+          <layer name="Bark1"></layer>
+        </state>
+
+        <state name="ScareR">
+          <layer name="Scare1"></layer>
+        </state>
+      </states>
+
+      <layers>
+
+        <layer name="Run1" x="0" y="-12">
+          <frame name="R1"></frame>
+          <frame name="R2"></frame>
+        </layer>
+
+        <layer name="Bark1" x="0" y="-12">
+          <frame name="B1"></frame>
+          <frame name="B2"></frame>
+        </layer>
+        <layer name="Scare1" x="0" y="-12">
+          <frame name="O1"></frame>
+          <frame name="O2"></frame>
+        </layer>
+      </layers>
+
+      <frames>
+
+        <frame name="R1" x="0" y="0" w="80" h="80" t="150"></frame>
+
+        <frame name="B1" x="80" y="0" w="80" h="80" t="200"></frame>
+
+        <frame name="O1" x="160" y="0" w="80" h="80" t="300"></frame>
+
+        <frame name="R2" x="0" y="80" w="80" h="80" t="150"></frame>
+
+        <frame name="B2" x="80" y="80" w="80" h="80" t="200"></frame>
+
+        <frame name="O2" x="160" y="80" w="80" h="80" t="200"></frame>
+
+      </frames>
+
+    </spritesheet>
+
+
+  </spritesheets>

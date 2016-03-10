@@ -4,6 +4,8 @@
     window.onload = function () {
 
         var manifest = HYPERGAP.API.getManifest();
+
+        document.body.style["background-color"]=manifest.backgroundColor||"black";
        
         //List of presets, only two operations: push and read
         //This allows to detect when all the callbacks have been executed

@@ -61,6 +61,7 @@
     <Content Include="clockwork\clockwork.js" />
     <Content Include="clockwork\includedPresets.js" />
     <Content Include="clockwork\spritesheet.js" />
+    <Content Include="css\game.css" />
     <Content Include="css\menu.css" />
     <Content Include="default.html" />
     <Content Include="fonts\Xolonium-Bold.otf" />
