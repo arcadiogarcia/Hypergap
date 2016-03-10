@@ -15,7 +15,7 @@ HYPERGAP.presets.push([
         {
             name: "#collide", code: function (event) {
                 if (this.getVar("alive") == true) {
-                    if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
+                    if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("mouse")) {
                         if (event.shape2id == 1) {
                             this.setVar("#state", "BarkR");
                             this.setVar("vy", -8);
@@ -170,7 +170,7 @@ HYPERGAP.presets.push([
     events: [
        {
            name: "#collide", code: function (event) {
-               if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
+               if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("mouse")) {
                    if (event.shape2id == 1) {
                        this.engine.loadLevelByID("game");
                    }

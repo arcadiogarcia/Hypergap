@@ -15,7 +15,10 @@
         "h": 400
     },
     "externalCode":[],
-    "dependencies": [],
+    "dependencies": {
+        "presets":["mouse","storage","notificationManager"],
+        "collisions":["pointsAndBoxes"]
+    },
     "theme_color":"red",
     "tileIcon":"tileIcon.png",
     "enginefps": 60,

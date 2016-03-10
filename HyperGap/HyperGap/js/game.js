@@ -1,4 +1,6 @@
-﻿(function () {
+﻿var CLOCKWORKCONFIG;
+
+(function () {
     window.onload = function () {
 
         var manifest = HYPERGAP.API.getManifest();
@@ -29,7 +31,7 @@
             };
         })();
 
-        var CLOCKWORKCONFIG = {
+        CLOCKWORKCONFIG = {
             enginefps: manifest.enginefps,
             animationfps: manifest.animationfps,
             screenbuffer_width: manifest.screenResolution.w,
@@ -82,6 +84,8 @@
         function setUpEngine(animLib) {
             var engineInstance = new Clockwork();
             engineInstance.setAnimationEngine(animLib);
+            manifest.dependencies.collisions.map(x=> HYPERGAP.LIBRARIES.getIncludedCollisions()[x]).filter(x=>x).forEach(engineInstance.registerCollision);
+            manifest.dependencies.presets.map(x=> HYPERGAP.LIBRARIES.getIncludedPresets()[x]).filter(x=>x).forEach(engineInstance.loadPresets);
             engineInstance.loadPresets(HYPERGAP.presets.getPresets());
 
             manifest.levels.map(x=>"ms-appdata:///local/installedApps/" + manifest.name + "/" + manifest.scope + "/"+x).recursiveForEach(function (x,cb) {
