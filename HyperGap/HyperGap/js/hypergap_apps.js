@@ -5,7 +5,8 @@ HYPERGAP.apps = {};
 
 zip.workerScriptsPath = "/js/";
 
-HYPERGAP.apps.installGameFromLocaFile = function () {
+HYPERGAP.apps.installGameFromLocaFile = function (callback) {
+    showLoader("Select a .hgp file","");
     // Create the picker object and set options
     var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
     openPicker.viewMode = Windows.Storage.Pickers.PickerViewMode.list;
@@ -33,8 +34,12 @@ HYPERGAP.apps.installGameFromLocaFile = function () {
                     //    })
                     //});
 
+                    var nentries = entries.length;
+
                     function copyAppFiles(appname) {
+                        var currentfile = 1;
                         entries.recursiveForEach(function (file, cb) {
+                            showLoader("Copying game files", currentfile+"/"+nentries);
                             var localFolder = Windows.Storage.ApplicationData.current.localFolder;
                             var path = "installedApps/" + appname + "/" + file.filename;
                             var pathFolders = path.split("/");
@@ -55,6 +60,11 @@ HYPERGAP.apps.installGameFromLocaFile = function () {
                                                 output.flushAsync().done(function () {
                                                     input.close();
                                                     output.close();
+                                                    currentfile++;
+                                                    if (currentfile > nentries) {
+                                                        hideLoader();
+                                                        callback();
+                                                    }
                                                     cb();
                                                 });
                                             });

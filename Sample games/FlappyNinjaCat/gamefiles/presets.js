@@ -1,4 +1,8 @@
 HYPERGAP.presets.push([
+    {
+    name: "title",
+    sprite: "title"
+},
 {
     name: "dog",
     sprite: "paradog",

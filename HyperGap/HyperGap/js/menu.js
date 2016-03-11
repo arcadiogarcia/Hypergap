@@ -3,9 +3,9 @@ var itemArray = [
     { title: "Paradux", text: "Puzzle", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#530" },
     { title: "Another game", text: "?", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#a00" },
     { title: "JSonic the Edgehog", text: "Platformer", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#3ac" },
-{ title: "Install game", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { HYPERGAP.apps.installGameFromLocaFile(); } },
+{ title: "Install game", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { HYPERGAP.apps.installGameFromLocaFile(function () { location = "menu.html"; }); } },
 { title: "Reboot", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { location = "splash.html" } },
-{ title: "Reset", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { localStorage.clear();} }
+{ title: "Reset", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { localStorage.clear(); location = "splash.html";} }
 ];
 
 itemArray = itemArray.concat(HYPERGAP.apps.getInstalledApps().map(function (x) { return { title: x.name, text: "Installed app", picture: "ms-appdata:///local/installedApps/" + x.name + "/" + x.scope + "/" + x.tileIcon, color: x.theme_color, action: function () { HYPERGAP.apps.launchApp(x.name); } } }));
@@ -41,3 +41,12 @@ function clickTile(e) {
     }
 }
 
+function showLoader(msg, progress) {
+    document.getElementById("loadingOverlay").style.display = "block";
+    document.getElementById("loadingMessage").innerHTML = msg;
+    document.getElementById("loadingProgress").innerHTML = progress;
+}
+
+function hideLoader() {
+    document.getElementById("loadingOverlay").style.display = "none";
+}

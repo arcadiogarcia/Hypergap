@@ -3,6 +3,7 @@
   <level id="menu">
     <object name="someBG" type="static_background" x="0" y="0" ></object>
     <object name="someButton" type="button" x="300" y="250" ></object>
+    <object type="title" name="title" y="10" x="200"/>
     <object name="someMouse" type="mouse" x="0" y="0" ></object>
   </level>
   <level id="game">
