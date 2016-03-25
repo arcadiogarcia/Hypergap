@@ -53,7 +53,7 @@ function init() {
 function createDataSocket(hostname) {
     var tcpSocket = new Windows.Networking.Sockets.StreamSocket();
     document.body.innerHTML += ("connecting to " + hostname);
-    tcpSocket.connectAsync(hostname, "80").done(function () {
+    tcpSocket.connectAsync(hostname, "8777").done(function () {
         document.body.innerHTML += ("connected to " + hostname);
         var writer = new Windows.Storage.Streams.DataWriter(tcpSocket);
         writer.writeInt32(writer.measureString("hello from client"));
