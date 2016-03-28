@@ -16,7 +16,7 @@
     },
     "externalCode":[],
     "dependencies": {
-        "presets":["mouse","storage","notificationManager"],
+        "presets":["mouse","storage","notificationManager","keyboard"],
         "collisions":["pointsAndBoxes"]
     },
     "themeColor":"#4B5",

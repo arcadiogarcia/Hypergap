@@ -1,4 +1,28 @@
-﻿var datagramSocket = new Windows.Networking.Sockets.DatagramSocket();
+﻿var HYPERGAP = HYPERGAP || {};
+HYPERGAP.CONTROLLER = {};
+
+var nPlayers = 0;
+
+HYPERGAP.CONTROLLER.onMessage = function (message) {
+    switch (message) {
+        case "right":
+            var eventObj = document.createEvent("Events");
+            eventObj.initEvent("keydown", true, true);
+            eventObj.which = 29;
+            document.activeElement.dispatchEvent(eventObj);
+            break;
+        case "a-button":
+            var eventObj = document.createEvent("Events");
+            eventObj.initEvent("keydown", true, true);
+            eventObj.which = 65;
+            document.activeElement.dispatchEvent(eventObj);
+            break;
+    }
+    console.log(message);
+}
+
+
+var datagramSocket = new Windows.Networking.Sockets.DatagramSocket();
 datagramSocket.onmessagereceived = function (e, data) {
     var rawString = e.getDataReader().readString(15);
     while (rawString.indexOf("$") != -1) {
@@ -45,8 +69,15 @@ tcpListener.bindServiceNameAsync("8776", Windows.Networking.Sockets.SocketProtec
 // This has to be a real function ; it will "loop" back on itself with the
 // call to acceptAsync at the very end.
 function onServerAccept(eventArgument) {
-    console.log("heyyyyyyyyyyyyyyyyyy");
     tcpSocket = eventArgument.socket;
+    var writer = new Windows.Storage.Streams.DataWriter(tcpSocket.outputStream);
+    HYPERGAP.CONTROLLER.sendMessage = function (message) {
+        writer.writeInt32(writer.measureString(message));
+        writer.writeString(message);
+        writer.storeAsync();
+    };
+    HYPERGAP.CONTROLLER.sendMessage("SetPlayer%"+(nPlayers++));
+    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapMenu");
     tcpReader= new Windows.Storage.Streams.DataReader(tcpSocket.inputStream);
     startServerRead();
 }
@@ -74,6 +105,10 @@ function startServerRead() {
             // Read in the string.
             var string = tcpReader.readString(count);
             console.log("Server read: " + string);
+            if (HYPERGAP.CONTROLLER.onMessage) {
+                HYPERGAP.CONTROLLER.onMessage(string);
+            }
+            HYPERGAP.CONTROLLER.sendMessage("Server received: " + string);
             // Restart the read for more bytes.
             startServerRead();
         }); // End of "read in rest of string" function.
@@ -82,4 +117,14 @@ function startServerRead() {
 
 function onError(e) {
     console.log(e);
+}
+
+
+HYPERGAP.CONTROLLER.close = function () {
+    if (tcpListener) {
+        if(HYPERGAP.CONTROLLER.sendMessage){
+            HYPERGAP.CONTROLLER.sendMessage("Bye%LoadPage");
+        }
+        tcpListener.close();
+    }
 }

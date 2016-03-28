@@ -29,6 +29,15 @@ HYPERGAP.presets.push([
                 }
             }
         },
+        {
+           name: "keyboard_down", code: function (event) {
+               if (event.key==65) {
+                   this.setVar("#state", "BarkR");
+                   this.setVar("vy", -8);
+                   this.setVar("timer", 28);
+               }
+           }
+       }  ,
 		{
 		    name: "#loop", code: function (event) {
 		        if (this.getVar("#x") < 100) {
@@ -180,7 +189,14 @@ HYPERGAP.presets.push([
                    }
                }
            }
-       }
+       },
+       {
+           name: "keyboard_down", code: function (event) {
+               if (event.key==65) {
+                    this.engine.loadLevelByID("game");
+               }
+           }
+       }   
     ],
     collision: {
         "box": [

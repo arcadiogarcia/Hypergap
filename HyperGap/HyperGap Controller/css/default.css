@@ -1,2 +1,9 @@
 ﻿body {
 }
+
+.button{
+    position:absolute;
+    display:block;
+    background-color:#FFF;
+    color:#000;
+}

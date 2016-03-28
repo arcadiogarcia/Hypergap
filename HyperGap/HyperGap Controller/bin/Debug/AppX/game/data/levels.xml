@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<levels>
+  <level id="start">
+    <object name="text" type="text" x="640" y="360" vars='{"$text":"Looking for an HyperGap machine in the local network","$color":"#FFF"}'></object>
+  </level>
+  <level id="menu">
+    <object name="someBG" type="static_background" x="0" y="0" ></object>
+    <object name="someButton" type="button" x="300" y="250" ></object>
+    <object name="someMouse" type="basicMouse" x="0" y="0" ></object>
+  </level>
+  <level id="HyperGapMenu">
+    <object name="someBG" type="blackbg" x="0" y="0" ></object>
+    <!--<object name="someButton" type="hitbox" x="300" y="250" vars='{"w":200,"h":200,"action":"console.log(1)"}'></object>-->
+    <object name="dpad-right" type="dpad-right" x="350" y="275" ></object>
+    <object name="dpad-left" type="dpad-left" x="50" y="275" ></object>
+    <object name="dpad-up" type="dpad-up" x="225" y="100" ></object>
+    <object name="dpad-down" type="dpad-down" x="225" y="400" ></object>
+    <object name="a-button" type="a-button" x="1000" y="250" ></object>
+    <object name="b-button" type="b-button" x="850" y="400" ></object>
+    <object name="someMouse" type="basicMouse" x="0" y="0" ></object>
+  </level>
+  <level id="game">
+    <object name="mystorage" type="storage" x="0" y="0" ></object>
+    <object name="notificationManager" type="notificationManager" x="0" y="0" ></object>
+
+    <object name="someBG" type="background" x="0" y="0" ></object>
+    <object name="somePipe" type="pipe" x="200" y="265" ></object>
+    <object name="somePipe2" type="pipe_reverse" x="200" y="-165" ></object>
+    <object name="someDog" type="dog" x="0" y="100" ></object>
+    <object name="someMouse" type="basicMouse" x="0" y="0" ></object>
+    <object name="someScore" type="score" x="600" y="50" ></object>
+    <object name="maxScore" type="maxscore" x="600" y="100" ></object>
+  </level>
+</levels>

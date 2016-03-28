@@ -210,16 +210,14 @@ function drawTitle(t) {
 
 
 var exittimer, exit;
-document.addEventListener("keydown", function () {
-    if (exit === false) {
-        exit = true;
-        exittimer = 0;
-    }
-});
+document.addEventListener("keydown", exitSplash);
 
-document.addEventListener("click", function () {
+document.addEventListener("click", exitSplash);
+
+function exitSplash () {
     if (exit === false) {
         exit = true;
         exittimer = 0;
+        HYPERGAP.CONTROLLER.close()
     }
-});
+}

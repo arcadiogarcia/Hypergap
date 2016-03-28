@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<spritesheets>
+  <spritesheet name="background" src="game/assets/images/background.png">
+
+    <states>
+      <state name="moving">
+        <layer name="moving"></layer>
+      </state>
+      <state name="idle">
+        <layer name="idle"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="moving" x="-(t/10%800)" y="0">
+        <frame name="idle"></frame>
+      </layer>
+      <layer name="idle" x="0" y="0">
+        <frame name="idle"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="idle" x="0" y="0" w="1600" h="400" t="0"></frame>
+
+    </frames>
+
+  </spritesheet>
+
+  <spritesheet name="pipe" src="game/assets/images/pipe.png">
+
+    <states>
+      <state name="normal">
+        <layer name="Idle1"></layer>
+      </state>
+      <state name="reverse" flip="v">
+        <layer name="Idle1"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="Idle1" x="0" y="0">
+        <frame name="I1"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="I1" x="0" y="0" w="100" h="300" t="0"></frame>
+
+    </frames>
+
+  </spritesheet>
+
+  <spritesheet name="button" src="game/assets/images/button.png">
+
+    <states>
+      <state name="normal">
+        <layer name="Idle1"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="Idle1" x="0" y="0">
+        <frame name="I1"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="I1" x="0" y="0" w="200" h="100" t="0"></frame>
+
+    </frames>
+
+  </spritesheet>
+
+  <spritesheet name="text" >
+
+    <states>
+      <state name="normal">
+        <layer name="Idle1"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="Idle1" x="0" y="0">
+        <frame name="Text"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="Text" code="context.textBaseline ='top';context.textAlign='start';context.font='20pt Verdana';context.fillStyle = vars['$color'];context.fillText(vars['$text'],x,y);" t="0"></frame>
+    </frames>
+
+  </spritesheet>
+
+  <spritesheet name="paradog" src="game/assets/images/paradog_small.png">
+
+    <states>
+      <state name="IdleL">
+        <layer name="Idle1"></layer>
+      </state>
+      <state name="IdleR" flip="h">
+        <layer name="Idle1"></layer>
+      </state>
+      <state name="RunL">
+        <layer name="Run1"></layer>
+      </state>
+      <state name="RunR" flip="h">
+        <layer name="Run1"></layer>
+      </state>
+      <state name="SeeUL">
+        <layer name="SeeU1"></layer>
+      </state>
+      <state name="SeeUR" flip="h">
+        <layer name="SeeU1"></layer>
+      </state>
+      <state name="BarkL">
+        <layer name="Bark1"></layer>
+      </state>
+      <state name="BarkR" flip="h">
+        <layer name="Bark1"></layer>
+      </state>
+      <state name="ScareL">
+        <layer name="Scare1"></layer>
+      </state>
+      <state name="ScareR" flip="h">
+        <layer name="Scare1"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="Idle1" x="0" y="0">
+        <frame name="I1"></frame>
+        <frame name="I2"></frame>
+        <frame name="I3"></frame>
+        <frame name="I4"></frame>
+        <frame name="I5"></frame>
+        <frame name="I6"></frame>
+      </layer>
+      <layer name="Run1" x="0" y="0">
+        <frame name="R1"></frame>
+        <frame name="R2"></frame>
+        <frame name="R3"></frame>
+        <frame name="R4"></frame>
+        <frame name="R5"></frame>
+        <frame name="R6"></frame>
+      </layer>
+      <layer name="SeeU1" x="0" y="0">
+        <frame name="S1"></frame>
+        <frame name="S2"></frame>
+        <frame name="S3"></frame>
+      </layer>
+      <layer name="Bark1" x="0" y="0">
+        <frame name="B1"></frame>
+        <frame name="B2"></frame>
+        <frame name="B3"></frame>
+        <frame name="B4"></frame>
+      </layer>
+      <layer name="Scare1" x="0" y="0">
+        <frame name="O1"></frame>
+        <frame name="O2"></frame>
+        <frame name="O3"></frame>
+        <frame name="O4"></frame>
+        <frame name="O5"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="I1" x="0" y="0" w="59" h="57" t="100"></frame>
+      <frame name="I2" x="59" y="0" w="59" h="57" t="100"></frame>
+      <frame name="I3" x="117" y="0" w="59" h="57" t="100"></frame>
+      <frame name="I4" x="175" y="0" w="59" h="57" t="100"></frame>
+      <frame name="I5" x="234" y="0" w="59" h="57" t="100"></frame>
+      <frame name="I6" x="292" y="0" w="59" h="57" t="100"></frame>
+
+      <frame name="R1" x="0" y="177" w="59" h="57" t="100"></frame>
+      <frame name="R2" x="59" y="177" w="59" h="57" t="100"></frame>
+      <frame name="R3" x="117" y="177" w="59" h="57" t="100"></frame>
+      <frame name="R4" x="175" y="177" w="59" h="57" t="100"></frame>
+      <frame name="R5" x="234" y="177" w="59" h="57" t="100"></frame>
+      <frame name="R6" x="292" y="177" w="59" h="57" t="100"></frame>
+
+      <frame name="S1" x="0" y="59" w="59" h="57" t="100"></frame>
+      <frame name="S2" x="59" y="59" w="59" h="57" t="500"></frame>
+      <frame name="S3" x="117" y="59" w="59" h="57" t="100"></frame>
+
+      <frame name="B1" x="0" y="236" w="59" h="57" t="100"></frame>
+      <frame name="B2" x="59" y="236" w="59" h="57" t="100"></frame>
+      <frame name="B3" x="117" y="236" w="59" h="57" t="100"></frame>
+      <frame name="B4" x="175" y="236" w="59" h="57" t="100"></frame>
+
+      <frame name="O1" x="0" y="118" w="59" h="57" t="100"></frame>
+      <frame name="O2" x="59" y="118" w="59" h="57" t="100"></frame>
+      <frame name="O3" x="117" y="118" w="59" h="57" t="100"></frame>
+      <frame name="O4" x="175" y="118" w="59" h="57" t="0"></frame>
+      <frame name="O5" x="234" y="118" w="59" h="57" t="0"></frame>
+
+    </frames>
+
+  </spritesheet>
+
+  <spritesheet name="centeredText" >
+
+    <states>
+      <state name="normal">
+        <layer name="Idle1"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="Idle1" x="0" y="0">
+        <frame name="Text"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="Text" code="context.textBaseline ='middle';context.textAlign='center';context.font='20pt Verdana';context.fillStyle = vars['$color'];context.fillText(vars['$text'],x,y);" t="0"></frame>
+    </frames>
+
+  </spritesheet>
+
+  <spritesheet name="dpad-right" src="game/assets/images/dpad.png">
+    <states>
+      <state name="up">
+        <layer name="up"></layer>
+      </state>
+      <state name="down">
+        <layer name="down"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="up" x="0" y="0">
+        <frame name="up"></frame>
+      </layer>
+      <layer name="down" x="0" y="0">
+        <frame name="down"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="up" x="0" y="0" w="200" h="150" t="0"></frame>
+      <frame name="down" x="0" y="150" w="200" h="150" t="0"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="dpad-left" src="game/assets/images/dpad.png">
+    <states>
+      <state name="up" flip="h">
+        <layer name="up"></layer>
+      </state>
+      <state name="down" flip="h">
+        <layer name="down"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="up" x="0" y="0">
+        <frame name="up"></frame>
+      </layer>
+      <layer name="down" x="0" y="0">
+        <frame name="down"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="up" x="0" y="0" w="200" h="150" t="0"></frame>
+      <frame name="down" x="0" y="150" w="200" h="150" t="0"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="dpad-up" src="game/assets/images/dpad.png">
+    <states>
+      <state name="up" flip="v">
+        <layer name="up"></layer>
+      </state>
+      <state name="down" flip="v">
+        <layer name="down"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="up" x="0" y="0">
+        <frame name="up"></frame>
+      </layer>
+      <layer name="down" x="0" y="0">
+        <frame name="down"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="up" x="200" y="0" w="150" h="200" t="0"></frame>
+      <frame name="down" x="200" y="200" w="150" h="200" t="0"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="dpad-down" src="game/assets/images/dpad.png">
+    <states>
+      <state name="up">
+        <layer name="up"></layer>
+      </state>
+      <state name="down">
+        <layer name="down"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="up" x="0" y="0">
+        <frame name="up"></frame>
+      </layer>
+      <layer name="down" x="0" y="0">
+        <frame name="down"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="up" x="200" y="0" w="150" h="200" t="0"></frame>
+      <frame name="down" x="200" y="200" w="150" h="200" t="0"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="a-button" src="game/assets/images/ab-buttons.png">
+    <states>
+      <state name="up">
+        <layer name="up"></layer>
+      </state>
+      <state name="down">
+        <layer name="down"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="up" x="0" y="0">
+        <frame name="up"></frame>
+      </layer>
+      <layer name="down" x="0" y="0">
+        <frame name="down"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="up" x="0" y="0" w="200" h="200" t="0"></frame>
+      <frame name="down" x="0" y="200" w="200" h="200" t="0"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="b-button" src="game/assets/images/ab-buttons.png">
+    <states>
+      <state name="up">
+        <layer name="up"></layer>
+      </state>
+      <state name="down">
+        <layer name="down"></layer>
+      </state>
+    </states>
+    <layers>
+      <layer name="up" x="0" y="0">
+        <frame name="up"></frame>
+      </layer>
+      <layer name="down" x="0" y="0">
+        <frame name="down"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="up" x="200" y="0" w="200" h="200" t="0"></frame>
+      <frame name="down" x="200" y="200" w="200" h="200" t="0"></frame>
+    </frames>
+  </spritesheet>
+
+  <spritesheet name="blackbg" >
+
+    <states>
+      <state name="normal">
+        <layer name="Idle1"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="Idle1" x="0" y="0">
+        <frame name="Text"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="Text" code="context.fillStyle = '#000';context.fillRect(0,0,1280,720)" t="0"></frame>
+    </frames>
+
+  </spritesheet>
+  
+</spritesheets>
