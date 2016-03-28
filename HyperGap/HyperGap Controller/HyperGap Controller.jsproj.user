@@ -4,6 +4,7 @@
     <ReferenceCachePath>C:\Users\49pym\AppData\Local\Temp\HyperGap Controller_refcache</ReferenceCachePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebuggerFlavor>AppHostDeviceDebugger</DebuggerFlavor>
+    <DebuggerFlavor>AppHostLocalDebugger</DebuggerFlavor>
+    <MachineName>ArcadioPC</MachineName>
   </PropertyGroup>
 </Project>

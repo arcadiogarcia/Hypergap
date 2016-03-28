@@ -41,7 +41,7 @@ function init() {
         document.body.innerHTML += (rawString);
         createDataSocket(e.remoteAddress);
     };
-    datagramSocket.bindEndpointAsync(null, "8776").done(function () {
+    datagramSocket.bindEndpointAsync(null, "8775").done(function () {
         datagramSocket.joinMulticastGroup(new Windows.Networking.HostName("224.0.0.1"));
     }, function (e) {
         console.log(e);
@@ -53,7 +53,7 @@ function init() {
 function createDataSocket(hostname) {
     var tcpSocket = new Windows.Networking.Sockets.StreamSocket();
     document.body.innerHTML += ("connecting to " + hostname);
-    tcpSocket.connectAsync(hostname, "80").done(function () {
+    tcpSocket.connectAsync(hostname, "8776").done(function () {
         document.body.innerHTML += ("connected to " + hostname);
         var writer = new Windows.Storage.Streams.DataWriter(tcpSocket);
         writer.writeInt32(writer.measureString("hello from client"));

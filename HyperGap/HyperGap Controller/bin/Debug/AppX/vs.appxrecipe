@@ -10,7 +10,7 @@
     <PackageArchitecture>neutral</PackageArchitecture>
     <PackageIdentityName>7c21d66f-b8e1-486b-94af-eec2bcef9a13</PackageIdentityName>
     <IntermediateOutputPath>C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\bld\Debug\</IntermediateOutputPath>
-    <RegisteredManifestChecksum>6039C3076336D8A66F5FA9D1B9810A967D6D3F977D11577D2E8E3A369AF3345A</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>330EE819D74C1B705ECAE9433CD4BA9DDA02F00C22797267743E6558B67C0A06</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>7c21d66f-b8e1-486b-94af-eec2bcef9a13_1.0.0.0_neutral__kmkw1nvan8826</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>7c21d66f-b8e1-486b-94af-eec2bcef9a13_kmkw1nvan8826!App</RegisteredUserModeAppID>
     <RegisteredPackageID>7c21d66f-b8e1-486b-94af-eec2bcef9a13</RegisteredPackageID>
@@ -22,13 +22,13 @@
     <AppXManifest Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-03-24T16:50:13.193</Modified>
+      <Modified>2016-03-26T16:45:22.620</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\default.html">
       <PackagePath>default.html</PackagePath>
-      <Modified>2016-03-24T00:00:20.390</Modified>
+      <Modified>2016-03-26T16:35:54.488</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\images\LockScreenLogo.scale-200.png">
       <PackagePath>images\LockScreenLogo.scale-200.png</PackagePath>
@@ -66,7 +66,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\js\default.js">
       <PackagePath>js\default.js</PackagePath>
-      <Modified>2016-03-24T16:53:48.707</Modified>
+      <Modified>2016-03-26T16:55:36.358</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\WinJS\js\en-US\ui.strings.js">
       <PackagePath>WinJS\js\en-US\ui.strings.js</PackagePath>
@@ -98,7 +98,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\bin\Debug\ReverseMap\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-03-24T16:50:12.915</Modified>
+      <Modified>2016-03-26T16:45:22.552</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

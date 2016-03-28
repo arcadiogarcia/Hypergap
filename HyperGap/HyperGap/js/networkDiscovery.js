@@ -6,9 +6,10 @@ datagramSocket.onmessagereceived = function (e, data) {
     }
     console.log("Just received ", rawString);
 };
-datagramSocket.bindEndpointAsync(null, "8775").done(function () {
+var connectionProfile = Windows.Networking.Connectivity.NetworkInformation.getInternetConnectionProfile();
+datagramSocket.bindServiceNameAsync("8775", connectionProfile.networkAdapter).done(function () {
     datagramSocket.joinMulticastGroup(new Windows.Networking.HostName("224.0.0.1"));
-    datagramSocket.getOutputStreamAsync(new Windows.Networking.HostName("224.0.0.1"), "8776").done(function (stream) {
+    datagramSocket.getOutputStreamAsync(new Windows.Networking.HostName("224.0.0.1"), "8775").done(function (stream) {
         var myIP = Windows.Networking.Connectivity.NetworkInformation.getHostNames().filter(x=>x.type == 1).map(x=>x.rawName)[0];
         while (myIP.length < 15) {
             myIP += "$";
@@ -33,11 +34,11 @@ datagramSocket.bindEndpointAsync(null, "8775").done(function () {
 //});
 
 
-var tcpListener = new Windows.Networking.Sockets.StreamSocketListener();
+var tcpListener = new Windows.Networking.Sockets.StreamSocketListener(8779);
 var tcpReader, tcpSocket;
 tcpListener.control.qualityOfService = Windows.Networking.Sockets.SocketQualityOfService.lowLatency; //Does this improve anything?
 tcpListener.onconnectionreceived=onServerAccept;
-tcpListener.bindServiceNameAsync(80,Windows.Networking.Sockets.SocketProtectionLevel.plainSocket).done(function (e) {
+tcpListener.bindServiceNameAsync("8776", Windows.Networking.Sockets.SocketProtectionLevel.plainSocket).done(function (e) {
     console.log("Bind successful");
 }, onError);
 
