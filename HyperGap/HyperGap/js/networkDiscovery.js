@@ -31,20 +31,22 @@ datagramSocket.onmessagereceived = function (e, data) {
     console.log("Just received ", rawString);
 };
 var connectionProfile = Windows.Networking.Connectivity.NetworkInformation.getInternetConnectionProfile();
-datagramSocket.bindServiceNameAsync("8775", connectionProfile.networkAdapter).done(function () {
-    datagramSocket.joinMulticastGroup(new Windows.Networking.HostName("224.0.0.1"));
-    datagramSocket.getOutputStreamAsync(new Windows.Networking.HostName("224.0.0.1"), "8775").done(function (stream) {
-        var myIP = Windows.Networking.Connectivity.NetworkInformation.getHostNames().filter(x=>x.type == 1).map(x=>x.rawName)[0];
-        while (myIP.length < 15) {
-            myIP += "$";
-        }
-        stream.writeAsync(Windows.Security.Cryptography.CryptographicBuffer.convertStringToBinary(myIP, Windows.Security.Cryptography.BinaryStringEncoding.utf8));
+if (connectionProfile) {
+    datagramSocket.bindServiceNameAsync("8775", connectionProfile.networkAdapter).done(function () {
+        datagramSocket.joinMulticastGroup(new Windows.Networking.HostName("224.0.0.1"));
+        datagramSocket.getOutputStreamAsync(new Windows.Networking.HostName("224.0.0.1"), "8775").done(function (stream) {
+            var myIP = Windows.Networking.Connectivity.NetworkInformation.getHostNames().filter(x=>x.type == 1).map(x=>x.rawName)[0];
+            while (myIP.length < 15) {
+                myIP += "$";
+            }
+            stream.writeAsync(Windows.Security.Cryptography.CryptographicBuffer.convertStringToBinary(myIP, Windows.Security.Cryptography.BinaryStringEncoding.utf8));
+        });
+    }, function (e) {
+        console.log(e);
+    }, function (e) {
+        console.log(e);
     });
-}, function (e) {
-    console.log(e);
-}, function (e) {
-    console.log(e);
-});
+}
 
 //var tcpSocket = new Windows.Networking.Sockets.StreamSocket();
 //tcpSocket.bindServiceNameAsync("8779").done(function (e) {
