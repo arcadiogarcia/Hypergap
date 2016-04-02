@@ -2,13 +2,17 @@
 HYPERGAP.CONTROLLER = {};
 
 var nPlayers = 0;
+if(localStorage.maxPlayers){
+    nPlayers = parseInt(localStorage.maxPlayers);
+}
 
 HYPERGAP.CONTROLLER.onMessage = function (message,player) {
     if (message.indexOf("RegisterPlayer%") == 0) {
         var tempid = message.split("%")[1];
         HYPERGAP.CONTROLLER.sendMessage("PlayerJoined%" + tempid + "%" + nPlayers);
         messagesForNewControllers.map(function (x) { return "PrivateCommand%" + nPlayers + "%" + x; }).forEach(HYPERGAP.CONTROLLER.sendMessage);
-        nPlayers++; 
+        nPlayers++;
+        localStorage.maxPlayers = nPlayers;
     }
     if (message.indexOf("MenuClick%") == 0) {
         var id = message.split("%")[1];
@@ -171,6 +175,39 @@ HYPERGAP.CONTROLLER.close = function () {
         tcpListener.close();
     }
 }
+
+
+
+//var bluetoothQuery = Windows.Devices.Bluetooth.Rfcomm.RfcommDeviceService.getDeviceSelector(Windows.Devices.Bluetooth.Rfcomm.RfcommServiceId.obexObjectPush);
+//Windows.Devices.Enumeration.DeviceInformation.findAllAsync(bluetoothQuery, null).done(function (x) {
+//    console.log(x);
+//});
+//Windows.Devices.Bluetooth.Rfcomm.RfcommServiceProvider.createAsync(Windows.Devices.Bluetooth.Rfcomm.RfcommServiceId.obexObjectPush).done(function(result){
+//    var listener = new Windows.Networking.Sockets.StreamSocketListener();
+//    listener.onconnectionreceived = function(listener, args){
+//        console.log("hey");
+//    }
+//    listener.bindServiceNameAsync(result.serviceId.asString(), Windows.Networking.Sockets.SocketProtectionLevel.bluetoothEncryptionAllowNullAuthentication);
+//    InitializeServiceSdpAttributes(result);
+//    result.startAdvertising();
+//});
+
+//var SERVICE_VERSION_ATTRIBUTE_ID = 0x0300;
+//var SERVICE_VERSION_ATTRIBUTE_TYPE = 0x0A;   // UINT32
+//var SERVICE_VERSION = 200;
+
+//function InitializeServiceSdpAttributes(conn) {
+//    var writer = new Windows.Storage.Streams.DataWriter();
+
+//    // First write the attribute type
+//    writer.WriteByte(SERVICE_VERSION_ATTRIBUTE_TYPE)
+//    // Then write the data
+//    writer.WriteUint32(SERVICE_VERSION);
+
+//    var data = writer.DetachBuffer();
+//    conn.SdpRawAttributes.Add(SERVICE_VERSION_ATTRIBUTE_ID, data);
+//}
+
 
 var socket = io("http://slushasaservice.azurewebsites.net");
 

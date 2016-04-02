@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <levels>
   <level id="game">
+  <object name="bg" type="bg" x="0" y="0" ></object>
     <object name="dogSpawner" type="dogSpawner" x="0" y="0" ></object>
   </level>
 </levels>

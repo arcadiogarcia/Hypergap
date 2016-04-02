@@ -222,6 +222,11 @@ function setUpEngine(animLib) {
 
 var tempid;
 
+//var bluetoothQuery = Windows.Devices.Bluetooth.Rfcomm.RfcommDeviceService.getDeviceSelector(Windows.Devices.Bluetooth.Rfcomm.RfcommServiceId.obexObjectPush);
+//Windows.Devices.Enumeration.DeviceInformation.findAllAsync(bluetoothQuery, null).done(function (x) {
+//    console.log(x);
+//});
+
 function startSockets() {
     var socket = io("http://slushasaservice.azurewebsites.net");
 

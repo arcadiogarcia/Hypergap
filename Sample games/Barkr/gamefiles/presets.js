@@ -2,13 +2,14 @@ HYPERGAP.presets.push([
     {
         name: "dogSpawner",
         events: [
-              {
+            {
                 name: "selectSkin", code: function(event) {
-                    event=JSON.parse(event);
-                    var dog = this.engine.addObjectLive("remoteDog" + event.player, "dog" + event.skin, 100+700*Math.random(), 500);
+                    event = JSON.parse(event);
+                    var dog = this.engine.addObjectLive("remoteDog" + event.player, "dog" + event.skin, 100 + 700 * Math.random(), 600);
                     dog.setVar("id", event.player);
                     dog.setVar("$text", event.name);
-                    HYPERGAP.CONTROLLER.sendMessage("PrivateCommand"+'\u0025'+event.player+'\u0025'+"LoadLevel"+'\u0025'+"dogController");
+                    dog.setVar("dogSkin", event.skin);
+                    HYPERGAP.CONTROLLER.sendMessage("PrivateCommand" + '\u0025' + event.player + '\u0025' + "LoadLevel" + '\u0025' + "dogController");
                 }
             },
             {
@@ -186,161 +187,165 @@ HYPERGAP.presets.push([
         ]
     },
     {
-    name: "dog1",
-    sprite: "paradog1",
-    events: [
-        {
-            name: "#setup", code: function (event) {
-                this.setVar("#state", "IdleL");
-				this.setVar("timer", 0);
-                this.setVar("goingto", this.getVar("#x"));
-                this.setVar("lookto", "L");
-                this.setVar("$text",this.engine.getEngineVar("dogName"));
-                //this.setVar("$%stream%",true);
-                this.engine.execute_event("@createDog", {name:this.engine.getEngineVar("dogName"),skin:this.engine.getEngineVar("dogSkin"),x:this.getVar("#x"),"%keep%":true});
-            }
-        },
-         {
-            name: "setGoingTo", code: function (event) {
-                this.setVar("goingto", event+this.getVar("#x")-55);
-            }
-        },
-        
+        name: "dog1",
+        sprite: "paradog1",
+        events: [
+            {
+                name: "#setup", code: function(event) {
+                    this.setVar("#state", "IdleL");
+                    this.setVar("timer", 0);
+                    this.setVar("goingto", this.getVar("#x"));
+                    this.setVar("lookto", "L");
+                    this.setVar("$text", this.engine.getEngineVar("dogName"));
+                    //this.setVar("$%stream%",true);
+                    this.engine.execute_event("@createDog", { name: this.engine.getEngineVar("dogName"), skin: this.engine.getEngineVar("dogSkin"), x: this.getVar("#x"), "%keep%": true });
+                }
+            },
+            {
+                name: "setGoingTo", code: function(event) {
+                    this.setVar("goingto", event + this.getVar("#x") - 55);
+                }
+            },
+
             {
                 name: "keyboard_down", code: function(event) {
-                    if (event.key == 65 && event.player==this.getVar("id")) {
-                        this.execute_event("bark","Bark!")
+                    if (event.key == 65 && event.player == this.getVar("id")) {
+                        this.execute_event("bark", "Bark!")
                     }
-                    if (event.key == 37 && event.player==this.getVar("id")) {
-                        this.setVar("goingto", this.getVar("#x")+100);
+                    if (event.key == 37 && event.player == this.getVar("id")) {
+                        this.setVar("goingto", this.getVar("#x") + 100);
                     }
-                    if (event.key == 39 && event.player==this.getVar("id")) {
-                        this.setVar("goingto", this.getVar("#x")-100);
+                    if (event.key == 39 && event.player == this.getVar("id")) {
+                        this.setVar("goingto", this.getVar("#x") - 100);
                     }
                 }
             },
-         {
-            name: "bark", code: function (event) {
-                        if(this.getVar("timer")==0){
-                        var name=event;
-                        if(name!=null){
-                            var color="#FFF";
-                            switch(this.engine.getEngineVar("dogSkin")){
+            {
+                name: "bark", code: function(event) {
+                    if (this.getVar("timer") == 0) {
+                        var name = event;
+                        if (name != null) {
+                            var color = "#FFF";
+                            switch (this.getVar("dogSkin")) {
                                 case 1:
-                                color="#d09d3a";
-                                break;
+                                    color = "#d09d3a";
+                                    break;
                                 case 2:
-                                color="#aa785f";
-                                break;
+                                    color = "#aa785f";
+                                    break;
                                 case 3:
-                                color="#768993";
-                                break;
+                                    color = "#768993";
+                                    break;
                                 case 4:
-                                color="#fff";
-                                break;
+                                    color = "#fff";
+                                    break;
                                 case 5:
-                                color="#959595";
-                                break;
+                                    color = "#959595";
+                                    break;
                                 case 6:
-                                color="#43434a";
-                                break;
+                                    color = "#43434a";
+                                    break;
                                 case 7:
-                                color="#6c9d80";
-                                break;
+                                    color = "#6c9d80";
+                                    break;
                                 case 8:
-                                color="#d68ac6";
-                                break;
+                                    color = "#d68ac6";
+                                    break;
                                 case 9:
-                                color="#bfe0ff";
-                                break;
+                                    color = "#bfe0ff";
+                                    break;
                                 case 10:
-                                color="#b3aa56";
-                                break;
+                                    color = "#b3aa56";
+                                    break;
                             }
-                             this.engine.execute_event("newmessage");
-                            var chat=this.engine.addObjectLive("someChatBox","chatBox",this.getVar("#x")+55,this.getVar("#y")-100);
-                            chat.setVar("$text",name);
-                            chat.setVar("$color",color);
-						this.setVar("#state", "Bark"+this.getVar("lookto"));
-						this.setVar("timer", 30);
+                            this.engine.execute_event("newmessage");
+                            var chat = this.engine.addObjectLive("someChatBox", "chatBox", this.getVar("#x") + 55, this.getVar("#y") - 100);
+                            chat.setVar("$text", name);
+                            chat.setVar("$color", color);
+                            this.setVar("#state", "Bark" + this.getVar("lookto"));
+                            this.setVar("timer", 30);
                         }
-                        }
-            }
-        
-         },
-		{
-            name: "#loop", code: function (event) {
-                if(this.getVar("timer")==0){
-                 var gt=this.getVar("goingto");
-                 var x=this.getVar("#x");
-                 if(gt > x+6){
-                     this.engine.getAnimationEngine().moveCameraX(6);
-                     this.setVar("#x",this.getVar("#x")+6);
-                     this.setVar("#state", "RunR");
-                     this.setVar("lookto", "R");
-                 } else if (gt < x-6){
-                     this.engine.getAnimationEngine().moveCameraX(-6);
-                     this.setVar("#x",this.getVar("#x")-6);
-                     this.setVar("#state", "RunL");
-                     this.setVar("lookto", "L");
-                 }else{
-                     this.setVar("#state", "Idle"+this.getVar("lookto"));
-                 }
-                }else{
-                    this.setVar("timer",this.getVar("timer")-1);
+                    }
                 }
-               
+
+            },
+            {
+                name: "#loop", code: function(event) {
+                    if (this.getVar("timer") == 0) {
+                        var gt = this.getVar("goingto");
+                        var x = this.getVar("#x");
+                        if (gt > x + 6) {
+                            //  this.engine.getAnimationEngine().moveCameraX(6);
+                            this.setVar("#x", this.getVar("#x") + 6);
+                            this.setVar("#state", "RunR");
+                            this.setVar("lookto", "R");
+                        } else if (gt < x - 6) {
+                            //  this.engine.getAnimationEngine().moveCameraX(-6);
+                            this.setVar("#x", this.getVar("#x") - 6);
+                            this.setVar("#state", "RunL");
+                            this.setVar("lookto", "L");
+                        } else {
+                            this.setVar("#state", "Idle" + this.getVar("lookto"));
+                        }
+                    } else {
+                        this.setVar("timer", this.getVar("timer") - 1);
+                    }
+
+                }
             }
-        }
-    ],
+        ],
 
-    
-},
 
-{
-    name: "dog2",
-    sprite: "paradog2",
-    inherits:"dog1"
-},
-{
-    name: "dog3",
-    sprite: "paradog3",
-    inherits:"dog1"
-},
-{
-    name: "dog4",
-    sprite: "paradog4",
-    inherits:"dog1"
-},
-{
-    name: "dog5",
-    sprite: "paradog5",
-    inherits:"dog1"
-},
-{
-    name: "dog6",
-    sprite: "paradog6",
-    inherits:"dog1"
-},
-{
-    name: "dog7",
-    sprite: "paradog7",
-    inherits:"dog1"
-},
-{
-    name: "dog8",
-    sprite: "paradog8",
-    inherits:"dog1"
-},
-{
-    name: "dog9",
-    sprite: "paradog9",
-    inherits:"dog1"
-},
-{
-    name: "dog10",
-    sprite: "paradog10",
-    inherits:"dog1"
-},
+    },
+
+    {
+        name: "dog2",
+        sprite: "paradog2",
+        inherits: "dog1"
+    },
+    {
+        name: "dog3",
+        sprite: "paradog3",
+        inherits: "dog1"
+    },
+    {
+        name: "dog4",
+        sprite: "paradog4",
+        inherits: "dog1"
+    },
+    {
+        name: "dog5",
+        sprite: "paradog5",
+        inherits: "dog1"
+    },
+    {
+        name: "dog6",
+        sprite: "paradog6",
+        inherits: "dog1"
+    },
+    {
+        name: "dog7",
+        sprite: "paradog7",
+        inherits: "dog1"
+    },
+    {
+        name: "dog8",
+        sprite: "paradog8",
+        inherits: "dog1"
+    },
+    {
+        name: "dog9",
+        sprite: "paradog9",
+        inherits: "dog1"
+    },
+    {
+        name: "dog10",
+        sprite: "paradog10",
+        inherits: "dog1"
+    },
+    {
+        name: "bg",
+        sprite: "bg",
+    }
 
 ]);

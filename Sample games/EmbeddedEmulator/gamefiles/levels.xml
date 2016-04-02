@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<levels>
+  <level id="menu">
+    <object name="emulator" type="emulator" x="0" y="0" ></object>
+
+  </level>
+
+</levels>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<levels>
+  <level id="motionController">
+        <object name="someBG" type="blackbg" x="0" y="0" ></object>
+    <!--<object name="someButton" type="hitbox" x="300" y="250" vars='{"w":200,"h":200,"action":"console.log(1)"}'></object>-->
+        <object name="accelerometer" type="accelerometer" x="0" y="0" ></object>
+        <object name="a-button" type="a-button" x="1000" y="150" ></object>
+        <object name="b-button" type="b-button" x="850" y="400" ></object>
+        <object name="someMouse" type="basicMouse" x="0" y="0" ></object>
+  </level>
+</levels>

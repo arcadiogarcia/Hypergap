@@ -1,43 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <spritesheets>
+    <spritesheet name="bg" src="images/bg.png">
+
+      <states>
+
+        <state name="idle">
+          <layer name="idle"></layer>
+        </state>
+      </states>
+
+      <layers>
+
+        <layer name="idle" x="0" y="0">
+          <frame name="idle"></frame>
+        </layer>
+      </layers>
+
+      <frames>
+        <frame name="idle" x="0" y="0" w="1280" h="720" t="0"></frame>
+
+      </frames>
+
+    </spritesheet>
   <spritesheet name="paradog1" src="images/paradog1.png">
 
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -123,39 +145,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -242,39 +264,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -359,39 +381,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -477,39 +499,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -596,39 +618,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -714,39 +736,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -833,39 +855,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -952,39 +974,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
@@ -1070,39 +1092,39 @@
     <states>
       <state name="IdleL">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="IdleR" flip="h">
         <layer name="Idle1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunL">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="RunR" flip="h">
         <layer name="Run1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUL">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="SeeUR" flip="h">
         <layer name="SeeU1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkL">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="BarkR" flip="h">
         <layer name="Bark1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
       <state name="Scare">
         <layer name="Scare1"></layer>
-          <layer name="text"></layer>
+          <!--<layer name="text"></layer>-->
       </state>
     </states>
 
