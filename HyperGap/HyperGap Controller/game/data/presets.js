@@ -407,5 +407,68 @@ var game_presets = [
            }
        }
     ]
+},
+{
+    name: "mirroredMenu",
+    events: [
+       {
+           name: "#setup", code: function (event) {
+               var element = document.createElement("div");
+               element.id = "menuDiv";
+               element.style.position = "absolute";
+               element.style.top = "0px";
+               element.style.left = "0px";
+               element.style.width = "100%";
+               element.style.height = "100%";
+               document.body.appendChild(element);
+               var tiles = [];
+               WinJS.Namespace.define("Sample.ListView", {
+                   data: new WinJS.Binding.List(tiles)
+               });
+               var list = new WinJS.UI.ListView(element, {
+                   itemDataSource: Sample.ListView.data.dataSource,
+                   itemTemplate: document.getElementById('smallListIconTextTemplate'),
+                   selectionMode: 'none',
+                   tapBehavior: 'invokeOnly',
+                   itemsReorderable: true,
+                   layout: { type: WinJS.UI.GridLayout }
+               });
+               WinJS.UI.processAll().then(function () {
+                  list.addEventListener("iteminvoked", clickTile);
+               });
+               var that = this;
+               function clickTile(e) {
+                   var itemArray = that.getVar("itemArray");
+                   HYPERGAP.CONTROLLER.sendMessage("MenuClick%" + e.detail.itemIndex);
+                   that.execute_event("#exit");
+               }
+
+           }
+       },
+        {
+            name: "LoadMenu", code: function (event) {
+                if (!this.getVar("itemArray")) {
+                    var itemArray = JSON.parse(event);
+                    var itemArrayCopy = itemArray.map(function (x) { return x });
+                    function addTile() {
+                        if (itemArrayCopy.length > 0) {
+                            Sample.ListView.data.push(itemArrayCopy.shift());
+                            setTimeout(addTile, 200);
+                        }
+                    }
+                    this.setVar("itemArray", itemArray);
+                    addTile();
+                }
+            }
+        },
+         {
+             name: "#exit", code: function (event) {
+                 if(document.getElementById("menuDiv")){
+                     document.body.removeChild(document.getElementById("menuDiv"));
+                 }
+                 console.log("Im out")
+             }
+         }
+    ]
 }
 ];

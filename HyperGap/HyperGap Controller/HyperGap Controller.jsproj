@@ -58,6 +58,7 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="css\menu.css" />
     <Content Include="default.html" />
     <Content Include="game\assets\images\ab-buttons.png" />
     <Content Include="game\assets\images\background.png" />

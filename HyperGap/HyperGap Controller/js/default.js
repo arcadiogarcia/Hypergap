@@ -135,6 +135,10 @@ HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
         case "LoadLevel":
             engineInstance.loadLevelByID(message[1]);
             break;
+        case "ClockworkEvent":
+            engineInstance.execute_event(message[1], message[2]);
+            engineInstance.loadLevelByID(message[1]);
+            break;
         case "PlayerJoined":
             if (message[1] == tempid) {
                 HYPERGAP.CONTROLLER.player = message[2];
@@ -142,7 +146,7 @@ HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
             }
             break;
         case "Bye":
-            if (message[1] == "LoadPage") {
+            if (message[1] == "LoadPage" && tcpSocket) {
                 tcpSocket.close();
                 brokenconnection = true;
             }
@@ -190,21 +194,26 @@ function setUpEngine(animLib) {
 
     engineInstance.loadLevelsFromXML("game/data/levels.xml", function () {
         engineInstance.start(CLOCKWORKCONFIG.enginefps, document.getElementById("canvas"));
+        startSockets();
     });
 }
 
+var tempid;
 
-var socket = io("http://slushasaservice.azurewebsites.net");
+function startSockets() {
+    var socket = io("http://slushasaservice.azurewebsites.net");
 
 
-socket.on('event', function (data) {
-    HYPERGAP.CONTROLLER.onMessage(data.payload);
-});
+    socket.on('event', function (data) {
+        console.log(data.payload);
+        HYPERGAP.CONTROLLER.onMessage(data.payload);
+    });
 
-HYPERGAP.CONTROLLER.sendMessage = function (data) {
-    socket.emit('event', { payload: data, action: "start" });
+    HYPERGAP.CONTROLLER.sendMessage = function (data) {
+        socket.emit('event', { payload: data, action: "start" });
+    }
+
+    tempid = Math.random();
+
+    HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
 }
-
-var tempid = Math.random();
-
-HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);

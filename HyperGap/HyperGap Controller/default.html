@@ -10,6 +10,7 @@
     <link href="WinJS/css/ui-dark.css" rel="stylesheet" />
     <script src="WinJS/js/base.js"></script>
     <script src="WinJS/js/ui.js"></script>
+    <link href="css/menu.css" rel="stylesheet" />
 
     <!-- HyperGap_Controller references -->
     <link href="/css/default.css" rel="stylesheet" />
@@ -30,6 +31,17 @@
     <script src="js/default.js"></script>
 </head>
 <body >
+    <!-- Simple template for the ListView instantiation  -->
+    <div id="smallListIconTextTemplate" class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+        <div class="smallListIconTextItem" data-win-bind="style['background-color']: color">
+            <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: picture;tileId:tileId" />
+            <div class="smallListIconTextItem-Detail">
+                <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+                <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+            </div>
+        </div>
+    </div>
+
     <canvas id="canvas"></canvas>
 </body>
 </html>
