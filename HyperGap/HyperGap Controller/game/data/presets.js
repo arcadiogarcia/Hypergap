@@ -233,9 +233,9 @@ var game_presets = [
 },
 {
     name: "dpad-right",
-    inherit: "generic-button",
+    inherits: "generic-button",
     sprite: "dpad-right",
-    vars: [{name:"command", vaue:"right"}],
+    vars: [{name:"command", value:"right"}],
     collision: {
         "box": [
             { "x": 50, "y": 0, "w": 150, "h": 150 },
@@ -244,9 +244,9 @@ var game_presets = [
 },
 {
     name: "dpad-left",
-    inherit: "generic-button",
+    inherits: "generic-button",
     sprite: "dpad-left",
-    vars: [{name:"command", vaue:"left"}],
+    vars: [{name:"command", value:"left"}],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 150, "h": 150 },
@@ -257,8 +257,8 @@ var game_presets = [
 {
     name: "dpad-up",
     sprite: "dpad-up",
-    inherit: "generic-button",
-    vars: [{ name: "command", vaue: "up" }],
+    inherits: "generic-button",
+    vars: [{ name: "command", value: "up" }],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 150, "h": 150 },
@@ -294,39 +294,12 @@ var game_presets = [
     }
 },
 
+
 {
     name: "a-button",
+    inherits: "generic-button",
     sprite: "a-button",
-    events: [
-      {
-          name: "#collide", code: function (event) {
-              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
-                  if (event.shape2id == 0) {
-                      this.setVar("#state", "down");
-                      this.setVar("timer", 5);
-                  }
-                  if (event.shape2id == 1) {
-                      if (Windows.Phone) {
-                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      }
-                      if (HYPERGAP.CONTROLLER.sendMessage) {
-                          HYPERGAP.CONTROLLER.sendMessage("a-button");
-                      }
-                  }
-              }
-          }
-      },
-      {
-          name: "#loop", code: function (event) {
-              var t = this.getVar("timer")||0;
-              if (t == 0) {
-                  this.setVar("#state", "up");
-              } else {
-                  this.setVar("timer", t - 1);
-              }
-          }
-      }
-    ],
+    vars: [{name:"command", value:"a-button"}],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 200, "h": 200 },

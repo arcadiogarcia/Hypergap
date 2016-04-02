@@ -6,7 +6,7 @@ var brokenconnection = false;
 var HYPERGAP = HYPERGAP || {};
 HYPERGAP.CONTROLLER = {};
 HYPERGAP.CONTROLLER.player = NaN;
-
+HYPERGAP.presets=[];
 
 (function () {
 	"use strict";
@@ -133,10 +133,42 @@ HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
             HYPERGAP.CONTROLLER.player = parseInt(message[1]);
             break;
         case "LoadLevel":
+            console.log("opening level")
             engineInstance.loadLevelByID(message[1]);
             break;
+        case "ClockworkEvent":
+            engineInstance.execute_event(message[1], message[2]);
+            engineInstance.loadLevelByID(message[1]);
+            break;
+        case "PlayerJoined":
+            if (message[1] == tempid) {
+                HYPERGAP.CONTROLLER.player = message[2];
+                engineInstance.loadLevelByID("HyperGapMenu");
+            }
+            break;
+        case "PrivateCommand":
+            if (message[1] == HYPERGAP.CONTROLLER.player) {
+                message.shift();
+                message.shift();
+                HYPERGAP.CONTROLLER.onMessage(message.join("%"));
+            }
+            break;
+        case "RegisterSpritesheet":
+            var blob = new Blob([message[1]], { type: "text/xml" });
+            engineInstance.getAnimationEngine().asyncLoad(URL.createObjectURL(blob), function () { });
+            break;
+        case "RegisterPreset":
+            var blob = new Blob([message[1]], { type: "text/plain" });
+            eval(message[1]); //DONT JUDGE ME
+            engineInstance.loadPresets(HYPERGAP.presets, function () { });
+            break;
+        case "RegisterLevels":
+            var blob = new Blob([message[1]], { type: "text/xml" });
+            console.log("loading levels")
+            engineInstance.loadLevelsFromXML(URL.createObjectURL(blob), function () {console.log("loaded levels") });
+            break;
         case "Bye":
-            if (message[1] == "LoadPage") {
+            if (message[1] == "LoadPage" && tcpSocket) {
                 tcpSocket.close();
                 brokenconnection = true;
             }
@@ -184,20 +216,26 @@ function setUpEngine(animLib) {
 
     engineInstance.loadLevelsFromXML("game/data/levels.xml", function () {
         engineInstance.start(CLOCKWORKCONFIG.enginefps, document.getElementById("canvas"));
+        startSockets();
     });
 }
 
+var tempid;
 
-var socket = io("http://slushasaservice.azurewebsites.net");
-
-
-socket.on('event', function (data) {
-    HYPERGAP.CONTROLLER.onMessage(data);
-});
+function startSockets() {
+    var socket = io("http://slushasaservice.azurewebsites.net");
 
 
+    socket.on('event', function (data) {
+        console.log(data.payload);
+        HYPERGAP.CONTROLLER.onMessage(data.payload);
+    });
 
-HYPERGAP.CONTROLLER.sendMessage = function (data) {
-    data.action = "start";
-    socket.emit('event', data);
+    HYPERGAP.CONTROLLER.sendMessage = function (data) {
+        socket.emit('event', { payload: data, action: "start", player: HYPERGAP.CONTROLLER.player });
+    }
+
+    tempid = Math.random();
+
+    HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
 }

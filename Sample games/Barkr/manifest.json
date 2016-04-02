@@ -1,0 +1,33 @@
+{
+    "name": "Barkr",
+    "scope": "gamefiles",
+    "presets": [
+        "presets.js"
+    ],
+    "levels": [
+        "levels.xml"
+    ],
+    "spritesheets":[
+        "spritesheets.xml"
+    ],
+    "screenResolution": {
+        "w": 1280,
+        "h": 720
+    },
+    "controller":"dogMenu",
+    "controllerAssets":{
+        "levels":["levelsController.xml"],
+        "presets":["presetsController.js"],
+        "spritesheets":["spritesheetsController.xml"]
+    },
+    "externalCode":[],
+    "dependencies": {
+        "presets":["mouse","storage","notificationManager","keyboard"],
+        "collisions":["pointsAndBoxes"]
+    },
+    "themeColor":"#f87312",
+    "backgroundColor":"#000",
+    "tileIcon":"tileIcon.png",
+    "enginefps": 30,
+    "animationfps": 30
+}

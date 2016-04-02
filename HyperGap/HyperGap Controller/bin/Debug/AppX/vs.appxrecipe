@@ -22,13 +22,29 @@
     <AppXManifest Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-04-02T03:41:05.299</Modified>
+      <Modified>2016-04-02T16:12:31.618</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\css\menu.css">
+      <PackagePath>css\menu.css</PackagePath>
+      <Modified>2016-03-11T09:19:42.799</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\css\default.css">
+      <PackagePath>css\default.css</PackagePath>
+      <Modified>2016-03-28T21:28:17.479</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\WinJS\css\ui-dark.css">
+      <PackagePath>WinJS\css\ui-dark.css</PackagePath>
+      <Modified>2015-10-10T20:09:40.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\WinJS\css\ui-light.css">
+      <PackagePath>WinJS\css\ui-light.css</PackagePath>
+      <Modified>2015-10-10T20:09:40.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\default.html">
       <PackagePath>default.html</PackagePath>
-      <Modified>2016-04-02T02:39:58.932</Modified>
+      <Modified>2016-04-02T05:25:31.712</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\game\assets\images\ab-buttons.png">
       <PackagePath>game\assets\images\ab-buttons.png</PackagePath>
@@ -45,6 +61,10 @@
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\game\assets\images\dpad.png">
       <PackagePath>game\assets\images\dpad.png</PackagePath>
       <Modified>2016-03-28T21:28:17.516</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\game\assets\images\hypergapControllerSplash.png">
+      <PackagePath>game\assets\images\hypergapControllerSplash.png</PackagePath>
+      <Modified>2016-04-02T07:11:33.002</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\game\assets\images\paradog_small.png">
       <PackagePath>game\assets\images\paradog_small.png</PackagePath>
@@ -94,7 +114,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\game\data\presets.js">
       <PackagePath>game\data\presets.js</PackagePath>
-      <Modified>2016-04-02T02:06:19.407</Modified>
+      <Modified>2016-04-02T16:02:21.592</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\js\basicMouse.js">
       <PackagePath>js\basicMouse.js</PackagePath>
@@ -106,7 +126,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\js\default.js">
       <PackagePath>js\default.js</PackagePath>
-      <Modified>2016-04-02T03:55:14.989</Modified>
+      <Modified>2016-04-02T16:02:26.098</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\js\keyboard.js">
       <PackagePath>js\keyboard.js</PackagePath>
@@ -158,23 +178,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\game\data\levels.xml">
       <PackagePath>game\data\levels.xml</PackagePath>
-      <Modified>2016-04-02T02:47:14.707</Modified>
+      <Modified>2016-04-02T07:12:54.501</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\game\data\spritesheets.xml">
       <PackagePath>game\data\spritesheets.xml</PackagePath>
-      <Modified>2016-03-28T21:28:17.654</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\css\default.css">
-      <PackagePath>css\default.css</PackagePath>
-      <Modified>2016-03-28T21:28:17.479</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\WinJS\css\ui-dark.css">
-      <PackagePath>WinJS\css\ui-dark.css</PackagePath>
-      <Modified>2015-10-10T20:09:40.000</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\WinJS\css\ui-light.css">
-      <PackagePath>WinJS\css\ui-light.css</PackagePath>
-      <Modified>2015-10-10T20:09:40.000</Modified>
+      <Modified>2016-04-02T07:16:12.811</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\WinJS\fonts\Symbols.ttf">
       <PackagePath>WinJS\fonts\Symbols.ttf</PackagePath>
@@ -182,7 +190,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\49pym\Documents\GitHub\Hypergap\HyperGap\HyperGap Controller\bin\Debug\ReverseMap\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-04-02T03:41:05.007</Modified>
+      <Modified>2016-04-02T16:12:31.346</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

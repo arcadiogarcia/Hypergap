@@ -3,7 +3,7 @@ HYPERGAP.CONTROLLER = {};
 
 var nPlayers = 0;
 
-HYPERGAP.CONTROLLER.onMessage = function (message) {
+HYPERGAP.CONTROLLER.onMessage = function (message,player) {
     if (message.indexOf("RegisterPlayer%") == 0) {
         var tempid = message.split("%")[1];
         HYPERGAP.CONTROLLER.sendMessage("PlayerJoined%" + tempid + "%" + nPlayers);
@@ -16,6 +16,10 @@ HYPERGAP.CONTROLLER.onMessage = function (message) {
             HYPERGAP.MENU.invoke(id);
         }
     }
+    if (message.indexOf("ClockworkEvent%") == 0) {
+        var partsmessage = message.split("%");
+        CLOCKWORKCONFIG.engine.execute_event(partsmessage[1], partsmessage[2]);
+    }
     switch (message) {
         case "startSplash":
             if (HYPERGAP.SPLASH) {
@@ -24,32 +28,32 @@ HYPERGAP.CONTROLLER.onMessage = function (message) {
             break;
         case "right":
             if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
-                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 37 });
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 37,player:player });
             }
             break;
         case "left":
             if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
-                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 39 });
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 39,player:player });
             }
             break;
         case "up":
             if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
-                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 38 });
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 38,player:player });
             }
             break;
         case "down":
             if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
-                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 40 });
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 40, player: player });
             }
             break;
         case "a-button":
             if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
-                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 65 });
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 65,player:player });
             }
             break;
         case "b-button":
             if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
-                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 66 });
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 66, player: player });
             }
             break;
     }
@@ -172,7 +176,8 @@ var socket = io("http://slushasaservice.azurewebsites.net");
 
 
 socket.on('event', function (data) {
-    HYPERGAP.CONTROLLER.onMessage(data.payload);
+    console.log(data.player)
+    HYPERGAP.CONTROLLER.onMessage(data.payload||"",data.player);
 });
 
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<levels>
+   <level id="dogMenu">
+    <object name="blackbg" type="blackbg" x="0" y="0" ></object>
+    <object name="basicMouse" type="basicMouse" x="0" y="0" ></object>
+    <object name="someDog1" type="dog_menu1" x="156" y="150" ></object>
+    <object name="someDog2" type="dog_menu2" x="372" y="150" ></object>
+    <object name="someDog3" type="dog_menu3" x="588" y="150" ></object>
+    <object name="someDog4" type="dog_menu4" x="804" y="150" ></object>
+    <object name="someDog5" type="dog_menu5" x="1040" y="150" ></object>
+    <object name="someDog6" type="dog_menu6" x="156" y="350" ></object>
+    <object name="someDog7" type="dog_menu7" x="372" y="350" ></object>
+    <object name="someDog8" type="dog_menu8" x="588" y="350" ></object>
+    <object name="someDog9" type="dog_menu9" x="804" y="350" ></object>
+    <object name="someDog10" type="dog_menu10" x="1040" y="350" ></object>
+  </level>
+  <level id="dogController">
+        <object name="someBG" type="blackbg" x="0" y="0" ></object>
+    <!--<object name="someButton" type="hitbox" x="300" y="250" vars='{"w":200,"h":200,"action":"console.log(1)"}'></object>-->
+        <object name="dpad-right" type="dpad-right" x="350" y="275" ></object>
+        <object name="dpad-left" type="dpad-left" x="50" y="275" ></object>
+        <object name="a-button" type="a-button" x="1000" y="150" ></object>
+        <object name="b-button" type="b-button" x="850" y="400" ></object>
+        <object name="someMouse" type="basicMouse" x="0" y="0" ></object>
+  </level>
+</levels>

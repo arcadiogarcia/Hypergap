@@ -233,9 +233,9 @@ var game_presets = [
 },
 {
     name: "dpad-right",
-    inherit: "generic-button",
+    inherits: "generic-button",
     sprite: "dpad-right",
-    vars: [{name:"command", vaue:"right"}],
+    vars: [{name:"command", value:"right"}],
     collision: {
         "box": [
             { "x": 50, "y": 0, "w": 150, "h": 150 },
@@ -244,9 +244,9 @@ var game_presets = [
 },
 {
     name: "dpad-left",
-    inherit: "generic-button",
+    inherits: "generic-button",
     sprite: "dpad-left",
-    vars: [{name:"command", vaue:"left"}],
+    vars: [{name:"command", value:"left"}],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 150, "h": 150 },
@@ -257,8 +257,8 @@ var game_presets = [
 {
     name: "dpad-up",
     sprite: "dpad-up",
-    inherit: "generic-button",
-    vars: [{ name: "command", vaue: "up" }],
+    inherits: "generic-button",
+    vars: [{ name: "command", value: "up" }],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 150, "h": 150 },
@@ -294,39 +294,12 @@ var game_presets = [
     }
 },
 
+
 {
     name: "a-button",
+    inherits: "generic-button",
     sprite: "a-button",
-    events: [
-      {
-          name: "#collide", code: function (event) {
-              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
-                  if (event.shape2id == 0) {
-                      this.setVar("#state", "down");
-                      this.setVar("timer", 5);
-                  }
-                  if (event.shape2id == 1) {
-                      if (Windows.Phone) {
-                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      }
-                      if (HYPERGAP.CONTROLLER.sendMessage) {
-                          HYPERGAP.CONTROLLER.sendMessage("a-button");
-                      }
-                  }
-              }
-          }
-      },
-      {
-          name: "#loop", code: function (event) {
-              var t = this.getVar("timer")||0;
-              if (t == 0) {
-                  this.setVar("#state", "up");
-              } else {
-                  this.setVar("timer", t - 1);
-              }
-          }
-      }
-    ],
+    vars: [{name:"command", value:"a-button"}],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 200, "h": 200 },
@@ -407,5 +380,119 @@ var game_presets = [
            }
        }
     ]
+},
+{
+    name: "mirroredMenu",
+    events: [
+       {
+           name: "#setup", code: function (event) {
+               var element = document.createElement("div");
+               element.id = "menuDiv";
+               element.style.position = "absolute";
+               element.style.top = "0px";
+               element.style.left = "0px";
+               element.style.width = "100%";
+               element.style.height = "100%";
+               document.body.appendChild(element);
+               var tiles = [];
+               WinJS.Namespace.define("Sample.ListView", {
+                   data: new WinJS.Binding.List(tiles)
+               });
+               var list = new WinJS.UI.ListView(element, {
+                   itemDataSource: Sample.ListView.data.dataSource,
+                   itemTemplate: document.getElementById('smallListIconTextTemplate'),
+                   selectionMode: 'none',
+                   tapBehavior: 'invokeOnly',
+                   itemsReorderable: true,
+                   layout: { type: WinJS.UI.GridLayout }
+               });
+               WinJS.UI.processAll().then(function () {
+                   list.addEventListener("iteminvoked", clickTile);
+               });
+               var that = this;
+               function clickTile(e) {
+                   var itemArray = that.getVar("itemArray");
+                   HYPERGAP.CONTROLLER.sendMessage("MenuClick%" + e.detail.itemIndex);
+                   that.execute_event("#exit");
+               }
+
+           }
+       },
+        {
+            name: "LoadMenu", code: function (event) {
+                if (!this.getVar("itemArray")) {
+                    var itemArray = JSON.parse(event);
+                    var itemArrayCopy = itemArray.map(function (x) { return x });
+                    function addTile() {
+                        if (itemArrayCopy.length > 0) {
+                            Sample.ListView.data.push(itemArrayCopy.shift());
+                            setTimeout(addTile, 200);
+                        }
+                    }
+                    this.setVar("itemArray", itemArray);
+                    addTile();
+                }
+            }
+        },
+         {
+             name: "#exit", code: function (event) {
+                 if(document.getElementById("menuDiv")){
+                     document.body.removeChild(document.getElementById("menuDiv"));
+                 }
+                 console.log("Im out")
+             }
+         }
+    ]
+},
+{
+    name: "splashButton",
+    sprite: "splash",
+    events: [
+      {
+          name: "#collide", code: function (event) {
+              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
+                  if (event.shape2id == 0) {
+                      this.setVar("#state", "down");
+                  }
+                  if (event.shape2id == 1) {
+                      if (Windows.Phone) {
+                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
+                      }
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage("b-button");
+                      }
+                  }
+              }
+          }
+      }
+    ],
+    collision: {
+        "box": [
+            { "x": 0, "y": 0, "w": 200, "h": 200 },
+        ]
+    }
+},
+{
+    name: "splashButton",
+    sprite: "splash",
+    events: [
+      {
+          name: "#collide", code: function (event) {
+              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
+                  if (event.shape2id == 1) {
+                      this.setVar("#state", "progress");
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage("startSplash");
+                      }
+                  }
+              }
+          }
+      }
+    ],
+    collision: {
+        "box": [
+            { "x": 0, "y": 0, "w": 1280, "h": 720 },
+        ]
+    }
 }
 ];

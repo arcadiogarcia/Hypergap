@@ -381,5 +381,44 @@
     </frames>
 
   </spritesheet>
+
+  <spritesheet name="splash" src="game/assets/images/hypergapControllerSplash.png" >
+
+    <states>
+      <state name="normal">
+        <layer name="bg"></layer>
+        <layer name="black"></layer>
+        <layer name="foreground"></layer>
+      </state>
+      <state name="progress">
+        <layer name="bg"></layer>
+        <layer name="dynamicblack"></layer>
+        <layer name="foreground"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="bg" x="0" y="0">
+        <frame name="bg"></frame>
+      </layer>
+      <layer name="foreground" x="0" y="0">
+        <frame name="foreground"></frame>
+      </layer>
+      <layer name="black" x="0" y="0">
+        <frame name="black"></frame>
+      </layer>
+      <layer name="dynamicblack" x="0" y="0">
+        <frame name="dynamicblack"></frame>
+      </layer>
+    </layers>
+
+    <frames>
+      <frame name="black" code="context.fillStyle = '#000';context.globalAlpha=0.9;context.fillRect(0,0,1280,720)" t="0"></frame>
+      <frame name="dynamicblack" code="context.fillStyle = '#000';context.globalAlpha=0.9>t/1000?0.9-t/1000:0;context.fillRect(0,0,1280,720)" t="0"></frame>
+      <frame name="foreground" x="0" y="0" w="1280" h="720" t="0"></frame>
+      <frame name="bg" x="0" y="720" w="1280" h="720" t="0"></frame>
+    </frames>
+
+  </spritesheet>
   
 </spritesheets>

@@ -95,11 +95,57 @@
                 engineInstance.loadLevelsFromXML(x, cb);
             }, 0, function () {
                 engineInstance.start(CLOCKWORKCONFIG.enginefps, document.getElementById("canvas"));
+                var semaphorelength = 0;
                 if (HYPERGAP.CONTROLLER.sendMessage) {
-                    HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%" + (manifest.controller || "HyperGapMenu"));
+                    if (manifest.controllerAssets) {
+                        semaphorelength = manifest.controllerAssets.spritesheets.length + manifest.controllerAssets.presets.length + manifest.controllerAssets.levels.length;
+                        manifest.controllerAssets.spritesheets.map(x=>"ms-appdata:///local/installedApps/" + manifest.name + "/" + manifest.scope + "/"+x).forEach(function (x) {
+                            loadFileText(x, function (text) {
+                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterSpritesheet%" + text);
+                                semaphorelength--;
+                                evalSemaphore();
+                            });
+                        });
+                        manifest.controllerAssets.presets.map(x=>"ms-appdata:///local/installedApps/" + manifest.name + "/" + manifest.scope + "/" + x).forEach(function (x) {
+                            loadFileText(x, function (text) {
+                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterPreset%" + text);
+                                semaphorelength--;
+                                evalSemaphore();
+                            });
+                        });
+                        manifest.controllerAssets.levels.map(x=>"ms-appdata:///local/installedApps/" + manifest.name + "/" + manifest.scope + "/" + x).forEach(function (x) {
+                            loadFileText(x, function (text) {
+                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterLevels%" + text);
+                                semaphorelength--;
+                                evalSemaphore();
+                            });
+                        });
+                    }
+                }
+                evalSemaphore();
+                function evalSemaphore() {
+                    if (semaphorelength == 0) {
+                        HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%" + (manifest.controller || "HyperGapMenu"));
+                    }
                 }
             });
         }
+
+
+        function loadFileText(url, callback) {
+
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    callback(xmlhttp.responseText);
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+
+        }
+
         Object.defineProperty(Array.prototype, 'recursiveForEach', {
             enumerable:false,
          value:function (action, index, cb) {
