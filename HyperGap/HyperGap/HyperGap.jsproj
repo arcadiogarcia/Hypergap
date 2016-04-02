@@ -61,6 +61,7 @@
     <Content Include="clockwork\clockwork.js" />
     <Content Include="clockwork\includedPresets.js" />
     <Content Include="clockwork\spritesheet.js" />
+    <Content Include="cortana.html" />
     <Content Include="css\game.css" />
     <Content Include="css\menu.css" />
     <Content Include="default.html" />
@@ -95,6 +96,9 @@
     <Content Include="WinJS\js\en-US\ui.strings.js" />
     <Content Include="WinJS\js\base.js" />
     <Content Include="WinJS\js\ui.js" />
+    <Content Include="xml\cortana.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="HyperGap_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />

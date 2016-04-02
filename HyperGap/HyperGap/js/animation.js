@@ -1,6 +1,41 @@
 var HYPERGAP = HYPERGAP || {};
-HYPERGAP.SPLASH= {};
+HYPERGAP.SPLASH = {};
 
+
+if (typeof Windows !== 'undefined' &&
+  typeof Windows.UI !== 'undefined' &&
+  typeof Windows.ApplicationModel !== 'undefined') {
+    // Subscribe to the Windows Activation Event
+    Windows.UI.WebUI.WebUIApplication.addEventListener("activated", function (args) {
+        var activation = Windows.ApplicationModel.Activation;
+        // Check to see if the app was activated by a voice command
+        if (args.kind === activation.ActivationKind.voiceCommand) {
+            // Get the speech reco
+            var speechRecognitionResult = args.result;
+            var textSpoken = speechRecognitionResult.text;
+            // Determine the command type {search} defined in vcd
+            //if (speechRecognitionResult.rulePath[0] === "Launch") {
+            //    // Determine the stream name specified
+            //    var res = HYPERGAP.apps.getInstalledApps().filter(function (x) {
+            //        return x.name.toLowerCase().includes(textSpoken);
+            //    });
+            //    if (res.length > 0) {
+            //        HYPERGAP.apps.launchApp(res[0].name);
+            //    } else {
+            //        window.location = "https://www.bing.com/search?q=" + speechRecognitionResult;
+            //    }
+
+            //}
+
+                var res = HYPERGAP.apps.getInstalledApps();
+                var element = res[Math.floor(Math.random() * res.length)];
+                HYPERGAP.apps.launchApp(element.name);
+           
+        }
+    });
+} else {
+    console.log("Windows namespace is unavaiable");
+}
 
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
@@ -42,10 +77,10 @@ var t = 0;
 function draw() {
     context.fillStyle = "#030303";
     if (exit == true) {
-        context.globalAlpha=0.1;
+        context.globalAlpha = 0.1;
     }
     context.fillRect(0, 0, width, height);
-    context.globalAlpha=1;
+    context.globalAlpha = 1;
     var base_radius;
     stars.forEach(function (s) {
         var x = s.x, y = s.y;
@@ -58,7 +93,7 @@ function draw() {
             base_radius *= scale;
         }
 
-        context.globalAlpha=1-Math.sin(2 * Math.PI * (t % s.t) / s.t);
+        context.globalAlpha = 1 - Math.sin(2 * Math.PI * (t % s.t) / s.t);
         context.fillStyle = "rgba(" + s.r + "," + s.g + "," + (s.r + s.g) + ",0.4)";
         context.beginPath();
         context.arc(x, y, base_radius * 2, 0, 2 * Math.PI, false);
@@ -69,7 +104,7 @@ function draw() {
         context.arc(x, y, base_radius, 0, 2 * Math.PI, false);
         context.fill();
 
-        context.globalAlpha=1;
+        context.globalAlpha = 1;
         context.fillStyle = "#FFF";
         context.beginPath();
         context.arc(x, y, base_radius / 2, 0, 2 * Math.PI, false);
@@ -93,8 +128,8 @@ function draw() {
 
     drawTitle(t);
     exittimer++;
-    if(exittimer>150){
-        window.location="menu.html";
+    if (exittimer > 150) {
+        window.location = "menu.html";
         return;
     }
     requestAnimationFrame(draw);
@@ -117,8 +152,8 @@ function drawGAP(p) {
     }
     context.closePath();
     context.fill();
-    context.strokeStyle="#111";
-    context.lineWidth=2;
+    context.strokeStyle = "#111";
+    context.lineWidth = 2;
     context.stroke();
 };
 
@@ -126,9 +161,9 @@ function drawGAP(p) {
 function drawTitle(t) {
     var t1 = 40, t2 = 40, w = 2;
     if (t < t1) {
-        context.globalAlpha=1-t/(t1+t2);
+        context.globalAlpha = 1 - t / (t1 + t2);
         context.fillRect(0, 0, width, height);
-        context.globalAlpha=1;
+        context.globalAlpha = 1;
         context.save();
         context.beginPath();
         context.moveTo(width * 0.7 - t * width * 0.4 / t1, 0);
@@ -147,9 +182,9 @@ function drawTitle(t) {
         context.fillStyle = "#FFF";
         context.fillStyle = "#000";
     } else if (t < t1 + t2) {
-        context.globalAlpha=1-t/(t1+t2);
+        context.globalAlpha = 1 - t / (t1 + t2);
         context.fillRect(0, 0, width, height);
-        context.globalAlpha=1;
+        context.globalAlpha = 1;
         context.save();
         context.beginPath();
         context.moveTo(width * 0.3, 0);
@@ -197,13 +232,13 @@ function drawTitle(t) {
         context.textBaseline = "middle";
         var x1 = width / 2 - 30, x2 = width / 2 + 80, y1 = height / 2 - 100, y2 = height / 2 - 40;
         if (exit === true) {
-            var cx = width * 0.5+150, cy = height * 0.5-40;
+            var cx = width * 0.5 + 150, cy = height * 0.5 - 40;
             var scale = Math.pow(1.2, exittimer) / 20 + 1;
             x1 = (x1 - cx) * scale + cx;
             y1 = (y1 - cy) * scale + cy;
             x2 = (x2 - cx) * scale + cx;
             y2 = (y2 - cy) * scale + cy;
-            context.font = (100*scale)+"px Xolonium";
+            context.font = (100 * scale) + "px Xolonium";
         }
         context.fillText("hyper", x1, y1);
         context.fillText("gap", x2, y2);
@@ -218,7 +253,7 @@ document.addEventListener("keydown", exitSplash);
 
 document.addEventListener("click", exitSplash);
 
-function exitSplash () {
+function exitSplash() {
     if (exit === false) {
         exit = true;
         exittimer = 0;
@@ -228,3 +263,6 @@ function exitSplash () {
 
 HYPERGAP.SPLASH.click = exitSplash;
 HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%HyperGapSplashScreen");
+
+
+

@@ -23,6 +23,7 @@
       <uap:ApplicationContentUriRules>
         <uap:Rule Match="ms-appx-web:///" Type="include" WindowsRuntimeAccess="all" />
         <uap:Rule Match="https://archive.org/" Type="include" WindowsRuntimeAccess="none" />
+        <uap:Rule Match="https://www.bing.com/" Type="include" WindowsRuntimeAccess="none" />
       </uap:ApplicationContentUriRules>
     </Application>
   </Applications>

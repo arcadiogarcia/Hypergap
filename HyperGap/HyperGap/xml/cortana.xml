@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="en-us" Name="RJS">
+    <CommandPrefix>Hyper Gap</CommandPrefix>
+    <Example>Hyper Gap launch random game</Example>
+    <Command Name="Launch">
+      <Example>Launch random game</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase">Launch random game</ListenFor>
+      <Feedback>Launching a random game. Have fun!</Feedback>
+      <Navigate Target="cortana.html"/>
+    </Command>
+  </CommandSet>
+</VoiceCommands>
