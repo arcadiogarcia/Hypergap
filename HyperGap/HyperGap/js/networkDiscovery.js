@@ -6,7 +6,9 @@ var nPlayers = 0;
 HYPERGAP.CONTROLLER.onMessage = function (message) {
     if (message.indexOf("RegisterPlayer%") == 0) {
         var tempid = message.split("%")[1];
-        HYPERGAP.CONTROLLER.sendMessage("PlayerJoined%" +tempid+"%"+ (nPlayers++));
+        HYPERGAP.CONTROLLER.sendMessage("PlayerJoined%" + tempid + "%" + nPlayers);
+        messagesForNewControllers.map(function (x) { return "PrivateCommand%" + nPlayers + "%" + x; }).forEach(HYPERGAP.CONTROLLER.sendMessage);
+        nPlayers++; 
     }
     if (message.indexOf("MenuClick%") == 0) {
         var id = message.split("%")[1];
@@ -177,4 +179,11 @@ socket.on('event', function (data) {
 
 HYPERGAP.CONTROLLER.sendMessage = function (data) {
     socket.emit('event', { payload: data ,action:"start"});
+}
+
+var messagesForNewControllers = [];
+
+HYPERGAP.CONTROLLER.sendMessageToNewControllers = function (data) {
+    messagesForNewControllers.push(data);
+    HYPERGAP.CONTROLLER.sendMessage(data);
 }

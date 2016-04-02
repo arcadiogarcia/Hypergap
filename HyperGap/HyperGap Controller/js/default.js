@@ -145,6 +145,13 @@ HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
                 engineInstance.loadLevelByID("HyperGapMenu");
             }
             break;
+        case "PrivateCommand":
+            if (message[1] == HYPERGAP.CONTROLLER.player) {
+                message.shift();
+                message.shift();
+                HYPERGAP.CONTROLLER.onMessage(message.join("%"));
+            }
+            break;
         case "Bye":
             if (message[1] == "LoadPage" && tcpSocket) {
                 tcpSocket.close();

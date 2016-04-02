@@ -96,7 +96,7 @@
             }, 0, function () {
                 engineInstance.start(CLOCKWORKCONFIG.enginefps, document.getElementById("canvas"));
                 if (HYPERGAP.CONTROLLER.sendMessage) {
-                    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%" + (manifest.controller||"HyperGapMenu"));
+                    HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%" + (manifest.controller || "HyperGapMenu"));
                 }
             });
         }

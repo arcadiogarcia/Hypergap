@@ -227,4 +227,4 @@ function exitSplash () {
 }
 
 HYPERGAP.SPLASH.click = exitSplash;
-HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapSplashScreen");
+HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%HyperGapSplashScreen");
