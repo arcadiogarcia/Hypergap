@@ -84,6 +84,7 @@
     <Content Include="js\menu.js" />
     <Content Include="js\game.js" />
     <Content Include="js\networkDiscovery.js" />
+    <Content Include="js\socketio.js" />
     <Content Include="js\z-worker.js" />
     <Content Include="js\zip.js" />
     <Content Include="menu.html" />

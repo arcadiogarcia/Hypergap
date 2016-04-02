@@ -1,3 +1,6 @@
+var HYPERGAP = HYPERGAP || {};
+HYPERGAP.MENU = {};
+
 var itemArray = [
     { title: "Not a Cat", text: "Platformer", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#999" },
     { title: "Paradux", text: "Puzzle", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#530" },
@@ -49,4 +52,14 @@ function showLoader(msg, progress) {
 
 function hideLoader() {
     document.getElementById("loadingOverlay").style.display = "none";
+}
+
+HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapMenuMirroring");
+HYPERGAP.CONTROLLER.sendMessage("ClockworkEvent%LoadMenu%"+JSON.stringify(itemArray));
+
+HYPERGAP.MENU.invoke = function (e) {
+    var l = itemArray.filter(function (x) { return x.tileId == e });
+    if (l.length > 0 && l[0].action) {
+        l[0].action()
+    }
 }

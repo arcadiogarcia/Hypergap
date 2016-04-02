@@ -85,6 +85,7 @@
 
         function setUpEngine(animLib) {
             var engineInstance = new Clockwork();
+            CLOCKWORKCONFIG.engine = engineInstance;
             engineInstance.setAnimationEngine(animLib);
             manifest.dependencies.collisions.map(x=> HYPERGAP.LIBRARIES.getIncludedCollisions()[x]).filter(x=>x).forEach(engineInstance.registerCollision);
             manifest.dependencies.presets.map(x=> HYPERGAP.LIBRARIES.getIncludedPresets()[x]).filter(x=>x).forEach(engineInstance.loadPresets);
@@ -94,6 +95,9 @@
                 engineInstance.loadLevelsFromXML(x, cb);
             }, 0, function () {
                 engineInstance.start(CLOCKWORKCONFIG.enginefps, document.getElementById("canvas"));
+                if (HYPERGAP.CONTROLLER.sendMessage) {
+                    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%" + (manifest.controller||"HyperGapMenu"));
+                }
             });
         }
         Object.defineProperty(Array.prototype, 'recursiveForEach', {

@@ -434,7 +434,7 @@ var game_presets = [
                    layout: { type: WinJS.UI.GridLayout }
                });
                WinJS.UI.processAll().then(function () {
-                  list.addEventListener("iteminvoked", clickTile);
+                   list.addEventListener("iteminvoked", clickTile);
                });
                var that = this;
                function clickTile(e) {
@@ -470,5 +470,56 @@ var game_presets = [
              }
          }
     ]
+},
+{
+    name: "splashButton",
+    sprite: "splash",
+    events: [
+      {
+          name: "#collide", code: function (event) {
+              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
+                  if (event.shape2id == 0) {
+                      this.setVar("#state", "down");
+                  }
+                  if (event.shape2id == 1) {
+                      if (Windows.Phone) {
+                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
+                      }
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage("b-button");
+                      }
+                  }
+              }
+          }
+      }
+    ],
+    collision: {
+        "box": [
+            { "x": 0, "y": 0, "w": 200, "h": 200 },
+        ]
+    }
+},
+{
+    name: "splashButton",
+    sprite: "splash",
+    events: [
+      {
+          name: "#collide", code: function (event) {
+              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
+                  if (event.shape2id == 1) {
+                      this.setVar("#state", "progress");
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage("startSplash");
+                      }
+                  }
+              }
+          }
+      }
+    ],
+    collision: {
+        "box": [
+            { "x": 0, "y": 0, "w": 1280, "h": 720 },
+        ]
+    }
 }
 ];

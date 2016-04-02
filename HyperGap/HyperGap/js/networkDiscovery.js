@@ -4,18 +4,51 @@ HYPERGAP.CONTROLLER = {};
 var nPlayers = 0;
 
 HYPERGAP.CONTROLLER.onMessage = function (message) {
+    if (message.indexOf("RegisterPlayer%") == 0) {
+        var tempid = message.split("%")[1];
+        HYPERGAP.CONTROLLER.sendMessage("PlayerJoined%" +tempid+"%"+ (nPlayers++));
+    }
+    if (message.indexOf("MenuClick%") == 0) {
+        var id = message.split("%")[1];
+        if (HYPERGAP.MENU) {
+            HYPERGAP.MENU.invoke(id);
+        }
+    }
     switch (message) {
+        case "startSplash":
+            if (HYPERGAP.SPLASH) {
+                HYPERGAP.SPLASH.click();
+            }
+            break;
         case "right":
-            var eventObj = document.createEvent("Events");
-            eventObj.initEvent("keydown", true, true);
-            eventObj.which = 29;
-            document.activeElement.dispatchEvent(eventObj);
+            if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 37 });
+            }
+            break;
+        case "left":
+            if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 39 });
+            }
+            break;
+        case "up":
+            if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 38 });
+            }
+            break;
+        case "down":
+            if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 40 });
+            }
             break;
         case "a-button":
-            var eventObj = document.createEvent("Events");
-            eventObj.initEvent("keydown", true, true);
-            eventObj.which = 65;
-            document.activeElement.dispatchEvent(eventObj);
+            if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 65 });
+            }
+            break;
+        case "b-button":
+            if (window.CLOCKWORKCONFIG && window.CLOCKWORKCONFIG.engine) {
+                CLOCKWORKCONFIG.engine.execute_event("keyboard_down", { key: 66 });
+            }
             break;
     }
     console.log(message);
@@ -60,6 +93,8 @@ if (connectionProfile) {
 //});
 
 
+
+//TODO: UNCOMMENT THIS
 var tcpListener = new Windows.Networking.Sockets.StreamSocketListener(8779);
 var tcpReader, tcpSocket;
 tcpListener.control.qualityOfService = Windows.Networking.Sockets.SocketQualityOfService.lowLatency; //Does this improve anything?
@@ -129,4 +164,17 @@ HYPERGAP.CONTROLLER.close = function () {
         }
         tcpListener.close();
     }
+}
+
+var socket = io("http://slushasaservice.azurewebsites.net");
+
+
+socket.on('event', function (data) {
+    HYPERGAP.CONTROLLER.onMessage(data.payload);
+});
+
+
+
+HYPERGAP.CONTROLLER.sendMessage = function (data) {
+    socket.emit('event', { payload: data ,action:"start"});
 }

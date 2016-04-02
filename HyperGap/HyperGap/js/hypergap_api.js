@@ -9,3 +9,7 @@ HYPERGAP.API.appPath = function () {
 HYPERGAP.API.getManifest = function () {
     return JSON.parse(localStorage.currentAppManifest);
 }
+
+HYPERGAP.API.loadMenu = function () {
+    location = "menu.html";
+}

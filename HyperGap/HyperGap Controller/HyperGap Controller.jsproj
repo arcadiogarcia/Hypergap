@@ -64,6 +64,7 @@
     <Content Include="game\assets\images\background.png" />
     <Content Include="game\assets\images\button.png" />
     <Content Include="game\assets\images\dpad.png" />
+    <Content Include="game\assets\images\hypergapControllerSplash.png" />
     <Content Include="game\assets\images\paradog_small.png" />
     <Content Include="game\assets\images\pipe.png" />
     <Content Include="game\data\config.js" />

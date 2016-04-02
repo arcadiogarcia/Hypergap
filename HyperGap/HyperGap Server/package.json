@@ -1,0 +1,14 @@
+{
+  "name": "HyperGapServer",
+  "version": "0.0.0",
+  "description": "This is just a test server to be able to use the HyperGap Controller when the network is blocking the traffic.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "socket.io": "~1.4.5"
+  }
+}

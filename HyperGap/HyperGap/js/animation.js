@@ -1,3 +1,7 @@
+var HYPERGAP = HYPERGAP || {};
+HYPERGAP.SPLASH= {};
+
+
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 
@@ -221,3 +225,6 @@ function exitSplash () {
         HYPERGAP.CONTROLLER.close()
     }
 }
+
+HYPERGAP.SPLASH.click = exitSplash;
+HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapSplashScreen");
