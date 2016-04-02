@@ -83,6 +83,7 @@
     <Content Include="js\keyboard.js" />
     <Content Include="js\pointerAPI.js" />
     <Content Include="js\pointsAndBoxes.js" />
+    <Content Include="js\socketio.js" />
     <Content Include="js\sound.js" />
     <Content Include="js\spritesheet.js" />
     <Content Include="js\storage.js" />

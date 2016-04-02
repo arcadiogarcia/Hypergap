@@ -199,23 +199,43 @@ var game_presets = [
     ]
 },
 {
-    name: "dpad-right",
-    sprite: "dpad-right",
+    name: "generic-button",
     events: [
       {
           name: "#collide", code: function (event) {
               if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
                   if (event.shape2id == 0) {
                       this.setVar("#state", "down");
+                      this.setVar("timer", 5);
                   }
                   if (event.shape2id == 1) {
-                      Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      HYPERGAP.CONTROLLER.sendMessage("right");
+                      if (Windows.Phone) {
+                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
+                      }
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage(this.getVar("command"));
+                      }
                   }
               }
           }
+      },
+      {
+          name: "#loop", code: function (event) {
+              var t = this.getVar("timer") || 0;
+              if (t == 0) {
+                  this.setVar("#state", "up");
+              } else {
+                  this.setVar("timer", t - 1);
+              }
+          }
       }
-    ],
+    ]
+},
+{
+    name: "dpad-right",
+    inherit: "generic-button",
+    sprite: "dpad-right",
+    vars: [{name:"command", vaue:"right"}],
     collision: {
         "box": [
             { "x": 50, "y": 0, "w": 150, "h": 150 },
@@ -224,22 +244,9 @@ var game_presets = [
 },
 {
     name: "dpad-left",
+    inherit: "generic-button",
     sprite: "dpad-left",
-    events: [
-      {
-          name: "#collide", code: function (event) {
-              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
-                  if (event.shape2id == 0) {
-                      this.setVar("#state", "down");
-                  }
-                  if (event.shape2id == 1) {
-                      Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      HYPERGAP.CONTROLLER.sendMessage("left");
-                  }
-              }
-          }
-      }
-    ],
+    vars: [{name:"command", vaue:"left"}],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 150, "h": 150 },
@@ -250,21 +257,8 @@ var game_presets = [
 {
     name: "dpad-up",
     sprite: "dpad-up",
-    events: [
-      {
-          name: "#collide", code: function (event) {
-              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
-                  if (event.shape2id == 0) {
-                      this.setVar("#state", "down");
-                  }
-                  if (event.shape2id == 1) {
-                      Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      HYPERGAP.CONTROLLER.sendMessage("up");
-                  }
-              }
-          }
-      }
-    ],
+    inherit: "generic-button",
+    vars: [{ name: "command", vaue: "up" }],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 150, "h": 150 },
@@ -282,8 +276,12 @@ var game_presets = [
                       this.setVar("#state", "down");
                   }
                   if (event.shape2id == 1) {
-                      Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      HYPERGAP.CONTROLLER.sendMessage("down");
+                      if (Windows.Phone) {
+                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
+                      }
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage("up");
+                      }
                   }
               }
           }
@@ -305,11 +303,26 @@ var game_presets = [
               if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
                   if (event.shape2id == 0) {
                       this.setVar("#state", "down");
+                      this.setVar("timer", 5);
                   }
                   if (event.shape2id == 1) {
-                      Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      HYPERGAP.CONTROLLER.sendMessage("a-button");
+                      if (Windows.Phone) {
+                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
+                      }
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage("a-button");
+                      }
                   }
+              }
+          }
+      },
+      {
+          name: "#loop", code: function (event) {
+              var t = this.getVar("timer")||0;
+              if (t == 0) {
+                  this.setVar("#state", "up");
+              } else {
+                  this.setVar("timer", t - 1);
               }
           }
       }
@@ -331,8 +344,12 @@ var game_presets = [
                       this.setVar("#state", "down");
                   }
                   if (event.shape2id == 1) {
-                      Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      HYPERGAP.CONTROLLER.sendMessage("b-button");
+                      if (Windows.Phone) {
+                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
+                      }
+                      if (HYPERGAP.CONTROLLER.sendMessage) {
+                          HYPERGAP.CONTROLLER.sendMessage("b-button");
+                      }
                   }
               }
           }

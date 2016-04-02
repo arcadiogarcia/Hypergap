@@ -1,5 +1,8 @@
 ﻿// For an introduction to the Blank template, see the following documentation:
 // http://go.microsoft.com/fwlink/?LinkId=232509
+var serverip = null;
+var brokenconnection = false;
+
 var HYPERGAP = HYPERGAP || {};
 HYPERGAP.CONTROLLER = {};
 HYPERGAP.CONTROLLER.player = NaN;
@@ -19,7 +22,7 @@ HYPERGAP.CONTROLLER.player = NaN;
 			    document.getElementById("canvas").width = window.innerWidth;
 			    document.getElementById("canvas").height = window.innerHeight;
 			    setUpAnimation(setUpEngine);
-			    init();
+			    //init(); TODO:UNCOMMENT THIS
 			} else {
 				// TODO: This application was suspended and then terminated.
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
@@ -41,11 +44,14 @@ HYPERGAP.CONTROLLER.player = NaN;
 function init() {
     var datagramSocket = new Windows.Networking.Sockets.DatagramSocket();
     datagramSocket.onmessagereceived = function (e, data) {
-        var rawString = e.getDataReader().readString(15);
-        while (rawString.indexOf("$") != -1) {
-            rawString = rawString.replace("$", "");
+        //var rawString = e.getDataReader().readString(15);
+        //while (rawString.indexOf("$") != -1) {
+        //    rawString = rawString.replace("$", "");
+        //}
+        if (!serverip) {
+            serverip = e.remoteAddress;
+            createDataSocket(e.remoteAddress);
         }
-        createDataSocket(e.remoteAddress);
     };
     datagramSocket.bindEndpointAsync(null, "8775").done(function () {
         datagramSocket.joinMulticastGroup(new Windows.Networking.HostName("224.0.0.1"));
@@ -56,10 +62,13 @@ function init() {
     });
 }
 
+var tcpSocket
 var tcpReader;
 
+
+
 function createDataSocket(hostname) {
-    var tcpSocket = new Windows.Networking.Sockets.StreamSocket();
+    tcpSocket = new Windows.Networking.Sockets.StreamSocket();
     tcpSocket.connectAsync(hostname, "8776").done(function () {
         tcpReader = new Windows.Storage.Streams.DataReader(tcpSocket.inputStream);
         startServerRead();
@@ -70,13 +79,25 @@ function createDataSocket(hostname) {
             writer.storeAsync();
         };
         //HYPERGAP.CONTROLLER.sendMessage("hello from client");
-    }, function (e) { document.body.innerHTML += (e); });
+    }, function (e) {
+        brokenconnection = true;
+        console.log(e);
+    });
 }
+
+setInterval(function () {
+    if (brokenconnection) {
+        createDataSocket(serverip);
+        brokenconnection=false;
+    }
+}, 1000);
+
 function startServerRead() {
     tcpReader.loadAsync(4).done(function (sizeBytesRead) {
         // Make sure 4 bytes were read.
         if (sizeBytesRead !== 4) {
             //Connection lost
+            brokenconnection = true;
             return;
         }
 
@@ -101,6 +122,7 @@ function startServerRead() {
 }
 
 function onError(e) {
+    brokenconnection = true;
     console.log(e);
 }
 
@@ -112,6 +134,12 @@ HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
             break;
         case "LoadLevel":
             engineInstance.loadLevelByID(message[1]);
+            break;
+        case "Bye":
+            if (message[1] == "LoadPage") {
+                tcpSocket.close();
+                brokenconnection = true;
+            }
             break;
     }
 }
@@ -157,4 +185,19 @@ function setUpEngine(animLib) {
     engineInstance.loadLevelsFromXML("game/data/levels.xml", function () {
         engineInstance.start(CLOCKWORKCONFIG.enginefps, document.getElementById("canvas"));
     });
+}
+
+
+var socket = io("http://slushasaservice.azurewebsites.net");
+
+
+socket.on('event', function (data) {
+    HYPERGAP.CONTROLLER.onMessage(data);
+});
+
+
+
+HYPERGAP.CONTROLLER.sendMessage = function (data) {
+    data.action = "start";
+    socket.emit('event', data);
 }

@@ -22,7 +22,7 @@ HYPERGAP.CONTROLLER.player = NaN;
 			    document.getElementById("canvas").width = window.innerWidth;
 			    document.getElementById("canvas").height = window.innerHeight;
 			    setUpAnimation(setUpEngine);
-			    init();
+			    //init(); TODO:UNCOMMENT THIS
 			} else {
 				// TODO: This application was suspended and then terminated.
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
@@ -64,6 +64,8 @@ function init() {
 
 var tcpSocket
 var tcpReader;
+
+
 
 function createDataSocket(hostname) {
     tcpSocket = new Windows.Networking.Sockets.StreamSocket();
@@ -133,6 +135,12 @@ HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
         case "LoadLevel":
             engineInstance.loadLevelByID(message[1]);
             break;
+        case "PlayerJoined":
+            if (message[1] == tempid) {
+                HYPERGAP.CONTROLLER.player = message[2];
+                engineInstance.loadLevelByID("HyperGapMenu");
+            }
+            break;
         case "Bye":
             if (message[1] == "LoadPage") {
                 tcpSocket.close();
@@ -184,3 +192,19 @@ function setUpEngine(animLib) {
         engineInstance.start(CLOCKWORKCONFIG.enginefps, document.getElementById("canvas"));
     });
 }
+
+
+var socket = io("http://slushasaservice.azurewebsites.net");
+
+
+socket.on('event', function (data) {
+    HYPERGAP.CONTROLLER.onMessage(data.payload);
+});
+
+HYPERGAP.CONTROLLER.sendMessage = function (data) {
+    socket.emit('event', { payload: data, action: "start" });
+}
+
+var tempid = Math.random();
+
+HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
