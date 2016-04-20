@@ -119,6 +119,8 @@ function onServerAccept(eventArgument) {
     tcpSocket = eventArgument.socket;
     var writer = new Windows.Storage.Streams.DataWriter(tcpSocket.outputStream);
     HYPERGAP.CONTROLLER.sendMessage = function (message) {
+        console.log(message);
+        message=JSON.stringify({ payload: message, action: "start" });
         writer.writeInt32(writer.measureString(message));
         writer.writeString(message);
         writer.storeAsync();
@@ -153,9 +155,10 @@ function startServerRead() {
             var string = tcpReader.readString(count);
             console.log("Server read: " + string);
             if (HYPERGAP.CONTROLLER.onMessage) {
-                HYPERGAP.CONTROLLER.onMessage(string);
+                var data = JSON.parse(string);
+                HYPERGAP.CONTROLLER.onMessage(data.payload || "", data.player);
             }
-            HYPERGAP.CONTROLLER.sendMessage("Server received: " + string);
+            //HYPERGAP.CONTROLLER.sendMessage("Server received: " + string);
             // Restart the read for more bytes.
             startServerRead();
         }); // End of "read in rest of string" function.
@@ -209,23 +212,25 @@ HYPERGAP.CONTROLLER.close = function () {
 //}
 
 
-var socket = io("http://slushasaservice.azurewebsites.net");
+//var socket = io("http://slushasaservice.azurewebsites.net");
 
 
-socket.on('event', function (data) {
-    console.log(data.player)
-    HYPERGAP.CONTROLLER.onMessage(data.payload||"",data.player);
-});
+//socket.on('event', function (data) {
+//    console.log(data.player)
+//    HYPERGAP.CONTROLLER.onMessage(data.payload||"",data.player);
+//});
 
 
 
-HYPERGAP.CONTROLLER.sendMessage = function (data) {
-    socket.emit('event', { payload: data ,action:"start"});
-}
+//HYPERGAP.CONTROLLER.sendMessage = function (data) {
+//    socket.emit('event', { payload: data ,action:"start"});
+//}
 
 var messagesForNewControllers = [];
 
 HYPERGAP.CONTROLLER.sendMessageToNewControllers = function (data) {
     messagesForNewControllers.push(data);
-    HYPERGAP.CONTROLLER.sendMessage(data);
+    if (HYPERGAP.CONTROLLER.sendMessage) {
+        HYPERGAP.CONTROLLER.sendMessage(data);
+    }
 }

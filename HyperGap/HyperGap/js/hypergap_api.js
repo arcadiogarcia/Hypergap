@@ -11,5 +11,6 @@ HYPERGAP.API.getManifest = function () {
 }
 
 HYPERGAP.API.loadMenu = function () {
+    HYPERGAP.CONTROLLER.close();
     location = "menu.html";
 }

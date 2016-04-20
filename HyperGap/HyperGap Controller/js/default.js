@@ -22,7 +22,7 @@ HYPERGAP.presets=[];
 			    document.getElementById("canvas").width = window.innerWidth;
 			    document.getElementById("canvas").height = window.innerHeight;
 			    setUpAnimation(setUpEngine);
-			    //init(); TODO:UNCOMMENT THIS
+			    init(); 
 			} else {
 				// TODO: This application was suspended and then terminated.
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
@@ -74,10 +74,12 @@ function createDataSocket(hostname) {
         startServerRead();
         var writer = new Windows.Storage.Streams.DataWriter(tcpSocket.outputStream);
         HYPERGAP.CONTROLLER.sendMessage = function (message) {
+            var message = JSON.stringify({ payload: message, action: "start", player: HYPERGAP.CONTROLLER.player });
             writer.writeInt32(writer.measureString(message));
             writer.writeString(message);
             writer.storeAsync();
         };
+        HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
         //HYPERGAP.CONTROLLER.sendMessage("hello from client");
     }, function (e) {
         brokenconnection = true;
@@ -93,6 +95,9 @@ setInterval(function () {
 }, 1000);
 
 function startServerRead() {
+    if (brokenconnection) {
+        return;
+    }
     tcpReader.loadAsync(4).done(function (sizeBytesRead) {
         // Make sure 4 bytes were read.
         if (sizeBytesRead !== 4) {
@@ -113,7 +118,7 @@ function startServerRead() {
             var string = tcpReader.readString(count);
             
             if (HYPERGAP.CONTROLLER.onMessage) {
-                HYPERGAP.CONTROLLER.onMessage(string);
+                HYPERGAP.CONTROLLER.onMessage(JSON.parse(string).payload);
             }
             // Restart the read for more bytes.
             startServerRead();
@@ -127,6 +132,7 @@ function onError(e) {
 }
 
 HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
+    console.log(rawMessage);
     var message=rawMessage.split("%");
     switch (message[0]) {
         case "SetPlayer":
@@ -220,7 +226,7 @@ function setUpEngine(animLib) {
     });
 }
 
-var tempid;
+var tempid = Math.random();
 
 //var bluetoothQuery = Windows.Devices.Bluetooth.Rfcomm.RfcommDeviceService.getDeviceSelector(Windows.Devices.Bluetooth.Rfcomm.RfcommServiceId.obexObjectPush);
 //Windows.Devices.Enumeration.DeviceInformation.findAllAsync(bluetoothQuery, null).done(function (x) {
@@ -228,19 +234,19 @@ var tempid;
 //});
 
 function startSockets() {
-    var socket = io("http://slushasaservice.azurewebsites.net");
+    //var socket = io("http://slushasaservice.azurewebsites.net");
 
 
-    socket.on('event', function (data) {
-        console.log(data.payload);
-        HYPERGAP.CONTROLLER.onMessage(data.payload);
-    });
+    //socket.on('event', function (data) {
+    //    console.log(data.payload);
+    //    HYPERGAP.CONTROLLER.onMessage(data.payload);
+    //});
 
-    HYPERGAP.CONTROLLER.sendMessage = function (data) {
-        socket.emit('event', { payload: data, action: "start", player: HYPERGAP.CONTROLLER.player });
-    }
+    //HYPERGAP.CONTROLLER.sendMessage = function (data) {
+    //    socket.emit('event', { payload: data, action: "start", player: HYPERGAP.CONTROLLER.player });
+    //}
 
-    tempid = Math.random();
+    //tempid = Math.random();
 
-    HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
+    //HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
 }
