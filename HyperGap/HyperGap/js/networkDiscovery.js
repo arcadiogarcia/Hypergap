@@ -6,6 +6,8 @@ if(localStorage.maxPlayers){
     nPlayers = parseInt(localStorage.maxPlayers);
 }
 
+var players = [];
+
 HYPERGAP.CONTROLLER.onMessage = function (message,player) {
     if (message.indexOf("RegisterPlayer%") == 0) {
         var tempid = message.split("%")[1];
@@ -106,7 +108,6 @@ if (connectionProfile) {
 
 //TODO: UNCOMMENT THIS
 var tcpListener = new Windows.Networking.Sockets.StreamSocketListener(8779);
-var tcpReader, tcpSocket;
 tcpListener.control.qualityOfService = Windows.Networking.Sockets.SocketQualityOfService.lowLatency; //Does this improve anything?
 tcpListener.onconnectionreceived=onServerAccept;
 tcpListener.bindServiceNameAsync("8776", Windows.Networking.Sockets.SocketProtectionLevel.plainSocket).done(function (e) {
@@ -116,26 +117,33 @@ tcpListener.bindServiceNameAsync("8776", Windows.Networking.Sockets.SocketProtec
 // This has to be a real function ; it will "loop" back on itself with the
 // call to acceptAsync at the very end.
 function onServerAccept(eventArgument) {
+    var tcpReader, tcpSocket;
     tcpSocket = eventArgument.socket;
     var writer = new Windows.Storage.Streams.DataWriter(tcpSocket.outputStream);
-    HYPERGAP.CONTROLLER.sendMessage = function (message) {
+    HYPERGAP.CONTROLLER.sendMessage("SetPlayer%"+(nPlayers++));
+    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapMenu");
+    tcpReader = new Windows.Storage.Streams.DataReader(tcpSocket.inputStream);
+    players.push({ id: nPlayers, socket:tcpSocket, reader:tcpReader, sendMessage:function (message) {
         console.log(message);
         message=JSON.stringify({ payload: message, action: "start" });
         writer.writeInt32(writer.measureString(message));
         writer.writeString(message);
         writer.storeAsync();
-    };
-    HYPERGAP.CONTROLLER.sendMessage("SetPlayer%"+(nPlayers++));
-    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapMenu");
-    tcpReader= new Windows.Storage.Streams.DataReader(tcpSocket.inputStream);
-    startServerRead();
+    } });
+    startServerRead(tcpReader);
 }
+
+HYPERGAP.CONTROLLER.sendMessage = function (message) {
+    players.forEach(function (x) {
+        x.sendMessage(message);
+    })
+};
 
 // The protocol here is simple: a four-byte 'network byte order' (big-endian) integer
 // that says how long a string is, and then a string that is that long.
 // We wait for exactly 4 bytes, read in the count value, and then wait for
 // count bytes, and then display them.
-function startServerRead() {
+function startServerRead(tcpReader) {
     tcpReader.loadAsync(4).done(function (sizeBytesRead) {
         // Make sure 4 bytes were read.
         if (sizeBytesRead !== 4) {
@@ -160,7 +168,7 @@ function startServerRead() {
             }
             //HYPERGAP.CONTROLLER.sendMessage("Server received: " + string);
             // Restart the read for more bytes.
-            startServerRead();
+            startServerRead(tcpReader);
         }); // End of "read in rest of string" function.
     }, onError);
 }
