@@ -5,7 +5,7 @@ HYPERGAP.apps = {};
 
 zip.workerScriptsPath = "/js/";
 
-HYPERGAP.apps.installGameFromLocaFile = function (callback) {
+HYPERGAP.apps.installGameFromLocalFile = function (callback) {
     showLoader("Select a .hgp file","");
     // Create the picker object and set options
     var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
@@ -20,8 +20,25 @@ HYPERGAP.apps.installGameFromLocaFile = function (callback) {
         return file.openAsync(Windows.Storage.FileAccessMode.read);
     }).done(function (fileBuf) {
         var blob = MSApp.createBlobFromRandomAccessStream('application/zip', fileBuf);
-        // use a BlobReader to read the zip from a Blob object
+        HYPERGAP.apps.installGameFromBlob(blob, callback);
+    });
+};
 
+
+HYPERGAP.apps.installGameFromURL = function (url,callback) {
+    showLoader("Downloading the game package", "");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            HYPERGAP.apps.installGameFromBlob(this.response, callback);
+        }
+    }
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+};
+
+HYPERGAP.apps.installGameFromBlob = function (blob,callback) {
         zip.createReader(new zip.BlobReader(blob), function (reader) {
 
             // get all entries from the zip
@@ -124,7 +141,7 @@ HYPERGAP.apps.installGameFromLocaFile = function (callback) {
         }, function (error) {
             // onerror callback
         });
-    });
+
 
 }
 
