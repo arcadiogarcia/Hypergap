@@ -5,7 +5,6 @@ var brokenconnection = false;
 
 var HYPERGAP = HYPERGAP || {};
 HYPERGAP.CONTROLLER = {};
-HYPERGAP.CONTROLLER.player = NaN;
 HYPERGAP.presets=[];
 
 (function () {
@@ -74,12 +73,11 @@ function createDataSocket(hostname) {
         startServerRead();
         var writer = new Windows.Storage.Streams.DataWriter(tcpSocket.outputStream);
         HYPERGAP.CONTROLLER.sendMessage = function (message) {
-            var message = JSON.stringify({ payload: message, action: "start", player: HYPERGAP.CONTROLLER.player });
+            var message = JSON.stringify(message);
             writer.writeInt32(writer.measureString(message));
             writer.writeString(message);
             writer.storeAsync();
         };
-        HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
         //HYPERGAP.CONTROLLER.sendMessage("hello from client");
     }, function (e) {
         brokenconnection = true;
@@ -118,7 +116,7 @@ function startServerRead() {
             var string = tcpReader.readString(count);
             
             if (HYPERGAP.CONTROLLER.onMessage) {
-                HYPERGAP.CONTROLLER.onMessage(JSON.parse(string).payload);
+                HYPERGAP.CONTROLLER.onMessage(JSON.parse(string));
             }
             // Restart the read for more bytes.
             startServerRead();
@@ -135,29 +133,16 @@ HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
     console.log(rawMessage);
     var message=rawMessage.split("%");
     switch (message[0]) {
-        case "SetPlayer":
-            HYPERGAP.CONTROLLER.player = parseInt(message[1]);
-            break;
         case "LoadLevel":
             console.log("opening level")
             engineInstance.loadLevelByID(message[1]);
             break;
+        case "SetPlayer":
+            HYPERGAP.CONTROLLER.player = message[1];
+            break;
         case "ClockworkEvent":
             engineInstance.execute_event(message[1], message[2]);
             engineInstance.loadLevelByID(message[1]);
-            break;
-        case "PlayerJoined":
-            if (message[1] == tempid) {
-                HYPERGAP.CONTROLLER.player = message[2];
-                engineInstance.loadLevelByID("HyperGapMenu");
-            }
-            break;
-        case "PrivateCommand":
-            if (message[1] == HYPERGAP.CONTROLLER.player) {
-                message.shift();
-                message.shift();
-                HYPERGAP.CONTROLLER.onMessage(message.join("%"));
-            }
             break;
         case "RegisterSpritesheet":
             var blob = new Blob([message[1]], { type: "text/xml" });
@@ -249,4 +234,8 @@ function startSockets() {
     //tempid = Math.random();
 
     //HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
+}
+
+HYPERGAP.CONTROLLER.sendEvent = function (evtName, evtArgs) {
+    HYPERGAP.CONTROLLER.sendMessage("ClockworkEvent" + '\u0025' + evtName + '\u0025' + JSON.stringify(evtArgs));
 }

@@ -4,7 +4,7 @@
     <ReferenceCachePath>C:\Users\49pym\AppData\Local\Temp\HyperGap Controller_refcache</ReferenceCachePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebuggerFlavor>AppHostRemoteDebugger</DebuggerFlavor>
+    <DebuggerFlavor>AppHostDeviceDebugger</DebuggerFlavor>
     <WindowsPhoneEmulatorID>8BDF218D-FDBB-4A97-90F9-3AA33B559A92;Mobile Emulator 10.0.10240.0 WVGA 4 inch 512MB</WindowsPhoneEmulatorID>
     <MachineName>SURFACE-ARCADIO</MachineName>
   </PropertyGroup>

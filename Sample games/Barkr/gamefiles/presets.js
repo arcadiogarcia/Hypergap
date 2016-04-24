@@ -4,12 +4,10 @@ HYPERGAP.presets.push([
         events: [
             {
                 name: "selectSkin", code: function(event) {
-                    event = JSON.parse(event);
                     var dog = this.engine.addObjectLive("remoteDog" + event.player, "dog" + event.skin, 100 + 700 * Math.random(), 600);
                     dog.setVar("id", event.player);
                     dog.setVar("$text", event.name);
                     dog.setVar("dogSkin", event.skin);
-                    HYPERGAP.CONTROLLER.sendMessage("PrivateCommand" + '\u0025' + event.player + '\u0025' + "LoadLevel" + '\u0025' + "dogController");
                 }
             },
             {

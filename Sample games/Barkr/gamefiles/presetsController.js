@@ -29,11 +29,12 @@ HYPERGAP.presets.push(
                     if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
                         if (event.shape2id == 1) {
                             if (this.getVar("#state") != "BarkL") {
-                                HYPERGAP.CONTROLLER.sendMessage("ClockworkEvent" + '\u0025' + "selectSkin" + '\u0025' + JSON.stringify({
+                                HYPERGAP.CONTROLLER.sendEvent( "selectSkin" ,{
                                     skin: this.getVar("skin"),
-                                    player: HYPERGAP.CONTROLLER.player,
                                     name: "Some Dog"
-                                }));
+                                });
+                                this.engine.loadLevelByID("dogController");
+                                return "#exit";
                             }
                         }
                         if (event.shape2id == 0 && this.getVar("timer") == 0) {

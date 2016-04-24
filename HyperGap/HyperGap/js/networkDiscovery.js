@@ -9,13 +9,6 @@ if(localStorage.maxPlayers){
 var players = [];
 
 HYPERGAP.CONTROLLER.onMessage = function (message,player) {
-    if (message.indexOf("RegisterPlayer%") == 0) {
-        var tempid = message.split("%")[1];
-        HYPERGAP.CONTROLLER.sendMessage("PlayerJoined%" + tempid + "%" + nPlayers);
-        messagesForNewControllers.map(function (x) { return "PrivateCommand%" + nPlayers + "%" + x; }).forEach(HYPERGAP.CONTROLLER.sendMessage);
-        nPlayers++;
-        localStorage.maxPlayers = nPlayers;
-    }
     if (message.indexOf("MenuClick%") == 0) {
         var id = message.split("%")[1];
         if (HYPERGAP.MENU) {
@@ -24,7 +17,9 @@ HYPERGAP.CONTROLLER.onMessage = function (message,player) {
     }
     if (message.indexOf("ClockworkEvent%") == 0) {
         var partsmessage = message.split("%");
-        CLOCKWORKCONFIG.engine.execute_event(partsmessage[1], partsmessage[2]);
+        var args = JSON.parse(partsmessage[2]);
+        args.player = player;
+        CLOCKWORKCONFIG.engine.execute_event(partsmessage[1], args);
     }
     switch (message) {
         case "startSplash":
@@ -120,30 +115,41 @@ function onServerAccept(eventArgument) {
     var tcpReader, tcpSocket;
     tcpSocket = eventArgument.socket;
     var writer = new Windows.Storage.Streams.DataWriter(tcpSocket.outputStream);
-    HYPERGAP.CONTROLLER.sendMessage("SetPlayer%"+(nPlayers++));
-    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapMenu");
     tcpReader = new Windows.Storage.Streams.DataReader(tcpSocket.inputStream);
-    players.push({ id: nPlayers, socket:tcpSocket, reader:tcpReader, sendMessage:function (message) {
+    var playerid = nPlayers++;
+    localStorage.maxPlayers = nPlayers;
+    var sendMessage=function (message) {
         console.log(message);
-        message=JSON.stringify({ payload: message, action: "start" });
+        message=JSON.stringify(message);
         writer.writeInt32(writer.measureString(message));
         writer.writeString(message);
         writer.storeAsync();
-    } });
-    startServerRead(tcpReader);
+    };
+    players.push({ id: playerid, socket: tcpSocket, reader: tcpReader, sendMessage: sendMessage });
+    HYPERGAP.CONTROLLER.sendMessage("SetPlayer%"+playerid, playerid);
+    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapMenu",playerid);
+    messagesForNewControllers.forEach(function (x) { sendMessage(x, playerid);});
+    console.log("Listening for player "+playerid)
+    startServerRead(tcpReader, playerid);
 }
 
-HYPERGAP.CONTROLLER.sendMessage = function (message) {
-    players.forEach(function (x) {
-        x.sendMessage(message);
-    })
+HYPERGAP.CONTROLLER.sendMessage = function (message, playerid) {
+    if (playerid) {
+        players.filter(function (x) { return x.id == playerid;}).forEach(function (x) {
+            x.sendMessage(message);
+        });
+    } else {
+        players.forEach(function (x) {
+            x.sendMessage(message);
+        });
+    }
 };
 
 // The protocol here is simple: a four-byte 'network byte order' (big-endian) integer
 // that says how long a string is, and then a string that is that long.
 // We wait for exactly 4 bytes, read in the count value, and then wait for
 // count bytes, and then display them.
-function startServerRead(tcpReader) {
+function startServerRead(tcpReader, playerid) {
     tcpReader.loadAsync(4).done(function (sizeBytesRead) {
         // Make sure 4 bytes were read.
         if (sizeBytesRead !== 4) {
@@ -164,11 +170,11 @@ function startServerRead(tcpReader) {
             console.log("Server read: " + string);
             if (HYPERGAP.CONTROLLER.onMessage) {
                 var data = JSON.parse(string);
-                HYPERGAP.CONTROLLER.onMessage(data.payload || "", data.player);
+                HYPERGAP.CONTROLLER.onMessage(data, playerid);
             }
             //HYPERGAP.CONTROLLER.sendMessage("Server received: " + string);
             // Restart the read for more bytes.
-            startServerRead(tcpReader);
+            startServerRead(tcpReader, playerid);
         }); // End of "read in rest of string" function.
     }, onError);
 }
