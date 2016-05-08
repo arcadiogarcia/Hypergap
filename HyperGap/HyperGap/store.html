@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="winjs/css/ui-dark.css">
+    <link rel="stylesheet" type="text/css" href="css/store.css">
+    <script src="js/socketio.js"></script>
+    <script src="js/networkDiscovery.js"></script>
+    <script src="winjs/js/base.js"></script>
+    <script src="winjs/js/ui.js"></script>
+    <script src="js/zip.js"></script>
+    <script src="js/hypergap_apps.js"></script>
+    <script src="js/store.js"></script>
+</head>
+
+<body>
+
+    <!-- Simple template for the ListView instantiation  -->
+    <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+        <div class="smallListIconTextItem" data-win-bind="style['background-color']: color">
+            <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: picture;tileId:tileId" />
+            <div class="smallListIconTextItem-Detail">
+                <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+                <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+                <h6 class="win-h6" data-win-bind="textContent: size"></h6>
+                <h6 class="win-h6" data-win-bind="textContent: publisher"></h6>
+            </div>
+        </div>
+    </div>
+
+    <!-- The declarative markup necesary for ListView instantiation -->
+    <!-- Call WinJS.UI.processAll() in your initialization code -->
+    <div id="listView"
+         class="win-selectionstylefilled"
+         data-win-control="WinJS.UI.ListView"
+         data-win-options="{
+            itemDataSource: Sample.ListView.data.dataSource,
+            itemTemplate: select('.smallListIconTextTemplate'),
+            selectionMode: 'none',
+            tapBehavior: 'invokeOnly',
+            layout: { type: WinJS.UI.ListLayout }
+    }">
+    </div>
+
+    <div id="loadingOverlay">
+        <div id="loadingMessage">Copying game files</div>
+        <div id="loadingProgress">2/20</div>
+    </div>
+
+
+</body>
+
+</html>

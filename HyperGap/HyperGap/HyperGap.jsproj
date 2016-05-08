@@ -63,6 +63,7 @@
     <Content Include="clockwork\spritesheet.js" />
     <Content Include="cortana.html" />
     <Content Include="css\game.css" />
+    <Content Include="css\store.css" />
     <Content Include="css\menu.css" />
     <Content Include="default.html" />
     <Content Include="fonts\Xolonium-Bold.otf" />
@@ -82,12 +83,14 @@
     <Content Include="js\hypergap_api.js" />
     <Content Include="js\hypergap_apps.js" />
     <Content Include="js\inflate.js" />
+    <Content Include="js\store.js" />
     <Content Include="js\menu.js" />
     <Content Include="js\game.js" />
     <Content Include="js\networkDiscovery.js" />
     <Content Include="js\socketio.js" />
     <Content Include="js\z-worker.js" />
     <Content Include="js\zip.js" />
+    <Content Include="store.html" />
     <Content Include="menu.html" />
     <Content Include="splash.html" />
     <Content Include="WinJS\css\ui-dark.css" />

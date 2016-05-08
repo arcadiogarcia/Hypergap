@@ -6,6 +6,7 @@ var itemArray = [
     { title: "Paradux", text: "Puzzle", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#530" },
     { title: "Another game", text: "?", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#a00" },
     { title: "JSonic the Edgehog", text: "Platformer", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#3ac" },
+    { title: "Browse Store", text: "Store", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { HYPERGAP.CONTROLLER.close(); location = "store.html" } },
 { title: "Install game", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { HYPERGAP.apps.installGameFromLocalFile(function () { HYPERGAP.CONTROLLER.close(); location = "menu.html"; }); } },
 { title: "Download game", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { HYPERGAP.apps.installGameFromURL("https://github.com/arcadiogarcia/Hypergap/raw/master/Sample%20games/FlappyNinjaCat.hgp",function () { HYPERGAP.CONTROLLER.close(); location = "menu.html"; }); } },
 { title: "Reboot", text: "System", picture: "http://try.buildwinjs.com/images/fruits/60Mint.png", color: "#555", action: function () { HYPERGAP.CONTROLLER.close(); location = "splash.html" } },
