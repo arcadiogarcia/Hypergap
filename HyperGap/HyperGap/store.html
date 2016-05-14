@@ -23,11 +23,21 @@
                 <h4 class="win-h4" data-win-bind="textContent: title"></h4>
                 <h6 class="win-h6" data-win-bind="textContent: text"></h6>
                 <h6 class="win-h6" data-win-bind="textContent: size"></h6>
-                <h6 class="win-h6" data-win-bind="textContent: publisher"></h6>
+                <a data-win-bind="textContent: publisher" onclick="clickPublisher.apply(this);" href="#"></a>
+                <br/>
+                <button onclick="clickTile" data-win-bind="tileId:tileId"  >Install</button>
             </div>
         </div>
     </div>
 
+    <div id="actions">
+        <button class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';" onclick="navigationActions.goBack()">&#xe0a6;</button>
+        <input id="searchBox" class='win-textbox' type="text" style="margin:0px;flex:1;"/>
+        <button class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';" onclick="navigationActions.search(document.getElementById('searchBox').value)">&#x1f50d;</button>
+    </div>
+    <div id="textHeader" class="win-type-title" >
+        Top Games
+    </div>
     <!-- The declarative markup necesary for ListView instantiation -->
     <!-- Call WinJS.UI.processAll() in your initialization code -->
     <div id="listView"
@@ -37,7 +47,6 @@
             itemDataSource: Sample.ListView.data.dataSource,
             itemTemplate: select('.smallListIconTextTemplate'),
             selectionMode: 'none',
-            tapBehavior: 'invokeOnly',
             layout: { type: WinJS.UI.ListLayout }
     }">
     </div>

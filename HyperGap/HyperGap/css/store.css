@@ -3,11 +3,33 @@
     position:absolute;
     left:50%;
     margin-left:-325px;
+    top:120px;
+    padding:0px;
+}
+
+#textHeader {
+    width: 650px;
+    position:absolute;
+    left:50%;
+    margin-left:-325px;
+    top:80px;
+    font-family:'Segoe UI';
+}
+
+#actions {
+    width: 650px;
+    position:absolute;
+    left:50%;
+    margin-left:-325px;
+    top:20px;
+   text-align:center;
+   padding:0px;
+   display:flex;
 }
 
 /* Template for the items in the ListViews in this sample */
 .smallListIconTextItem {
-    width: 600px;
+    width: 650px;
     height: 200px;
     background-color: #444;
     padding: 5px;
