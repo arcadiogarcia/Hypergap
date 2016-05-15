@@ -75,6 +75,10 @@
     <Content Include="images\Square44x44Logo.scale-200.png" />
     <Content Include="images\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="images\StoreLogo.png" />
+    <Content Include="images\tiles\install.png" />
+    <Content Include="images\tiles\reboot.png" />
+    <Content Include="images\tiles\reset.png" />
+    <Content Include="images\tiles\store.png" />
     <Content Include="images\Wide310x150Logo.scale-200.png" />
     <Content Include="js\animation.js" />
     <Content Include="js\default.js" />

@@ -63,6 +63,7 @@ HYPERGAP.CONTROLLER.onMessage = function (message,player) {
 
 
 var datagramSocket = new Windows.Networking.Sockets.DatagramSocket();
+datagramSocket.control.outboundUnicastHopLimit = 10;
 datagramSocket.onmessagereceived = function (e, data) {
     var rawString = e.getDataReader().readString(15);
     while (rawString.indexOf("$") != -1) {

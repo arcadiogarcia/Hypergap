@@ -30,7 +30,7 @@
 /* Template for the items in the ListViews in this sample */
 .smallListIconTextItem {
     width: 650px;
-    height: 200px;
+    height: 210px;
     background-color: #444;
     padding: 5px;
     overflow: hidden;
@@ -38,22 +38,29 @@
     display: -webkit-flex;
     display: flex;
     animation: tileAppear 1s;
+    padding:0px;
 }
 
     .smallListIconTextItem img.smallListIconTextItem-Image {
         position: absolute;
-        top: 25px;
+        top: 5px;
         left: 5px;
         width: 260px;
         height: 200px;
         margin: 0px;
     }
 
+        .smallListIconTextItem a {
+        color:white;
+        font-family:'Segoe UI';
+        font-weight:bold;
+    }
+
     .smallListIconTextItem .smallListIconTextItem-Detail {
         position: absolute;
         top:20px;
         left: 280px;
-        width: 260px;
+        width: 350px;
         height: 55px;
         margin-left: 10px;
     }

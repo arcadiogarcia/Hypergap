@@ -37,7 +37,8 @@ function showMenu() {
 }
 
 function clickTile(e) {
-    var l = itemArray.filter(function (x) { return x.tileId == e.detail.itemIndex });
+    var that = this;
+    var l = itemArray.filter(function (x) { return x.tileId == that.tileId });
     if (l.length > 0 && l[0].action) {
         l[0].action()
     }

@@ -17,10 +17,16 @@ HYPERGAP.apps.installGameFromLocalFile = function (callback) {
 
 
     openPicker.pickSingleFileAsync().then(function (file) {
-        return file.openAsync(Windows.Storage.FileAccessMode.read);
+        if (file) {
+            return file.openAsync(Windows.Storage.FileAccessMode.read);
+        }
     }).done(function (fileBuf) {
-        var blob = MSApp.createBlobFromRandomAccessStream('application/zip', fileBuf);
-        HYPERGAP.apps.installGameFromBlob(blob, callback);
+        if (fileBuf) {
+            var blob = MSApp.createBlobFromRandomAccessStream('application/zip', fileBuf);
+            HYPERGAP.apps.installGameFromBlob(blob, callback);
+        } else {
+            callback();
+        }
     });
 };
 
