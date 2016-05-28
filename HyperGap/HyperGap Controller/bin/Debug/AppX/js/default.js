@@ -5,7 +5,6 @@ var brokenconnection = false;
 
 var HYPERGAP = HYPERGAP || {};
 HYPERGAP.CONTROLLER = {};
-HYPERGAP.CONTROLLER.player = NaN;
 HYPERGAP.presets=[];
 
 (function () {
@@ -22,7 +21,7 @@ HYPERGAP.presets=[];
 			    document.getElementById("canvas").width = window.innerWidth;
 			    document.getElementById("canvas").height = window.innerHeight;
 			    setUpAnimation(setUpEngine);
-			    //init(); TODO:UNCOMMENT THIS
+			    init(); 
 			} else {
 				// TODO: This application was suspended and then terminated.
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
@@ -74,6 +73,7 @@ function createDataSocket(hostname) {
         startServerRead();
         var writer = new Windows.Storage.Streams.DataWriter(tcpSocket.outputStream);
         HYPERGAP.CONTROLLER.sendMessage = function (message) {
+            var message = JSON.stringify(message);
             writer.writeInt32(writer.measureString(message));
             writer.writeString(message);
             writer.storeAsync();
@@ -93,6 +93,9 @@ setInterval(function () {
 }, 1000);
 
 function startServerRead() {
+    if (brokenconnection) {
+        return;
+    }
     tcpReader.loadAsync(4).done(function (sizeBytesRead) {
         // Make sure 4 bytes were read.
         if (sizeBytesRead !== 4) {
@@ -113,7 +116,7 @@ function startServerRead() {
             var string = tcpReader.readString(count);
             
             if (HYPERGAP.CONTROLLER.onMessage) {
-                HYPERGAP.CONTROLLER.onMessage(string);
+                HYPERGAP.CONTROLLER.onMessage(JSON.parse(string));
             }
             // Restart the read for more bytes.
             startServerRead();
@@ -127,31 +130,19 @@ function onError(e) {
 }
 
 HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
-    var message=rawMessage.split("%");
+    console.log(rawMessage);
+    var message=rawMessage.split("~");
     switch (message[0]) {
-        case "SetPlayer":
-            HYPERGAP.CONTROLLER.player = parseInt(message[1]);
-            break;
         case "LoadLevel":
             console.log("opening level")
             engineInstance.loadLevelByID(message[1]);
             break;
+        case "SetPlayer":
+            HYPERGAP.CONTROLLER.player = message[1];
+            break;
         case "ClockworkEvent":
             engineInstance.execute_event(message[1], message[2]);
             engineInstance.loadLevelByID(message[1]);
-            break;
-        case "PlayerJoined":
-            if (message[1] == tempid) {
-                HYPERGAP.CONTROLLER.player = message[2];
-                engineInstance.loadLevelByID("HyperGapMenu");
-            }
-            break;
-        case "PrivateCommand":
-            if (message[1] == HYPERGAP.CONTROLLER.player) {
-                message.shift();
-                message.shift();
-                HYPERGAP.CONTROLLER.onMessage(message.join("%"));
-            }
             break;
         case "RegisterSpritesheet":
             var blob = new Blob([message[1]], { type: "text/xml" });
@@ -220,22 +211,31 @@ function setUpEngine(animLib) {
     });
 }
 
-var tempid;
+var tempid = Math.random();
+
+//var bluetoothQuery = Windows.Devices.Bluetooth.Rfcomm.RfcommDeviceService.getDeviceSelector(Windows.Devices.Bluetooth.Rfcomm.RfcommServiceId.obexObjectPush);
+//Windows.Devices.Enumeration.DeviceInformation.findAllAsync(bluetoothQuery, null).done(function (x) {
+//    console.log(x);
+//});
 
 function startSockets() {
-    var socket = io("http://slushasaservice.azurewebsites.net");
+    //var socket = io("http://slushasaservice.azurewebsites.net");
 
 
-    socket.on('event', function (data) {
-        console.log(data.payload);
-        HYPERGAP.CONTROLLER.onMessage(data.payload);
-    });
+    //socket.on('event', function (data) {
+    //    console.log(data.payload);
+    //    HYPERGAP.CONTROLLER.onMessage(data.payload);
+    //});
 
-    HYPERGAP.CONTROLLER.sendMessage = function (data) {
-        socket.emit('event', { payload: data, action: "start", player: HYPERGAP.CONTROLLER.player });
-    }
+    //HYPERGAP.CONTROLLER.sendMessage = function (data) {
+    //    socket.emit('event', { payload: data, action: "start", player: HYPERGAP.CONTROLLER.player });
+    //}
 
-    tempid = Math.random();
+    //tempid = Math.random();
 
-    HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
+    //HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer~" + tempid);
+}
+
+HYPERGAP.CONTROLLER.sendEvent = function (evtName, evtArgs) {
+    HYPERGAP.CONTROLLER.sendMessage("ClockworkEvent" + '~' + evtName + '~' + JSON.stringify(evtArgs));
 }

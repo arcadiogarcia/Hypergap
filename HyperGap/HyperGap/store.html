@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <!--<meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-inline' 'unsafe-eval';"/>-->
     <link rel="stylesheet" type="text/css" href="winjs/css/ui-dark.css">
     <link rel="stylesheet" type="text/css" href="css/store.css">
     <script src="js/socketio.js"></script>
@@ -30,18 +31,18 @@
                 </div>
                 <div>
                     <h6 class="win-h6" style="display:inline;">Published by: </h6>
-                    <a data-win-bind="textContent: publisher" onclick="clickPublisher.apply(this);" href="#"></a>
+                    <a class="publisher" data-win-bind="textContent: publisher"  href="#"></a>
                 </div>
                 <br />
-                <button onclick="clickTile.apply(this)" data-win-bind="tileId:tileId" class="win-button">Install</button>
+                <button data-win-bind="tileId:tileId" class="win-button installbutton">Install</button>
             </div>
         </div>
     </div>
 
     <div id="actions">
-        <button class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';" onclick="navigationActions.goBack()">&#xe0a6;</button>
+        <button id="buttonBack" class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';" >&#xe0a6;</button>
         <input id="searchBox" class='win-textbox' type="text" style="margin:0px;flex:1;" />
-        <button class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';" onclick="navigationActions.search(document.getElementById('searchBox').value)">&#x1f50d;</button>
+        <button id="buttonSearch" class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';" >&#x1f50d;</button>
     </div>
     <div id="textHeader" class="win-type-title">
         Top Games

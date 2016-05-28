@@ -9,14 +9,21 @@ if(localStorage.maxPlayers){
 var players = [];
 
 HYPERGAP.CONTROLLER.onMessage = function (message,player) {
-    if (message.indexOf("MenuClick%") == 0) {
-        var id = message.split("%")[1];
+    if (message.indexOf("MenuClick~") == 0) {
+        var id = message.split("~")[1];
         if (HYPERGAP.MENU) {
             HYPERGAP.MENU.invoke(id);
         }
     }
-    if (message.indexOf("ClockworkEvent%") == 0) {
-        var partsmessage = message.split("%");
+    if (message.indexOf("Store~") == 0) {
+        if (HYPERGAP.STORE) {
+            var command = message.split("~");
+            command.shift();
+            HYPERGAP.STORE.executeCommand(command);
+        }
+    }
+    if (message.indexOf("ClockworkEvent~") == 0) {
+        var partsmessage = message.split("~");
         var args = JSON.parse(partsmessage[2]);
         args.player = player;
         CLOCKWORKCONFIG.engine.execute_event(partsmessage[1], args);
@@ -127,8 +134,8 @@ function onServerAccept(eventArgument) {
         writer.storeAsync();
     };
     players.push({ id: playerid, socket: tcpSocket, reader: tcpReader, sendMessage: sendMessage });
-    HYPERGAP.CONTROLLER.sendMessage("SetPlayer%"+playerid, playerid);
-    HYPERGAP.CONTROLLER.sendMessage("LoadLevel%HyperGapMenu",playerid);
+    HYPERGAP.CONTROLLER.sendMessage("SetPlayer~"+playerid, playerid);
+    HYPERGAP.CONTROLLER.sendMessage("LoadLevel~HyperGapMenu",playerid);
     messagesForNewControllers.forEach(function (x) { sendMessage(x, playerid);});
     console.log("Listening for player "+playerid)
     startServerRead(tcpReader, playerid);
@@ -188,7 +195,7 @@ function onError(e) {
 HYPERGAP.CONTROLLER.close = function () {
     if (tcpListener) {
         if(HYPERGAP.CONTROLLER.sendMessage){
-            HYPERGAP.CONTROLLER.sendMessage("Bye%LoadPage");
+            HYPERGAP.CONTROLLER.sendMessage("Bye~LoadPage");
         }
         tcpListener.close();
     }

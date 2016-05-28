@@ -52,7 +52,11 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>HyperGap_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>HyperGap_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>2EE8659443D50F282963EE611377B8A013F35FED</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -69,17 +73,58 @@
     <Content Include="fonts\Xolonium-Bold.otf" />
     <Content Include="fonts\Xolonium-Regular.otf" />
     <Content Include="game.html" />
+    <None Include="HyperGap_StoreKey.pfx" />
+    <Content Include="images\BadgeLogo.scale-100.png" />
+    <Content Include="images\BadgeLogo.scale-125.png" />
+    <Content Include="images\BadgeLogo.scale-150.png" />
+    <Content Include="images\BadgeLogo.scale-200.png" />
+    <Content Include="images\BadgeLogo.scale-400.png" />
     <Content Include="images\LockScreenLogo.scale-200.png" />
+    <Content Include="images\SplashScreen.scale-100.png" />
+    <Content Include="images\SplashScreen.scale-125.png" />
+    <Content Include="images\SplashScreen.scale-150.png" />
     <Content Include="images\SplashScreen.scale-200.png" />
+    <Content Include="images\SplashScreen.scale-400.png" />
+    <Content Include="images\Square150x150Logo.scale-100.png" />
+    <Content Include="images\Square150x150Logo.scale-125.png" />
+    <Content Include="images\Square150x150Logo.scale-150.png" />
     <Content Include="images\Square150x150Logo.scale-200.png" />
+    <Content Include="images\Square150x150Logo.scale-400.png" />
+    <Content Include="images\Square310x310Logo.scale-100.png" />
+    <Content Include="images\Square310x310Logo.scale-125.png" />
+    <Content Include="images\Square310x310Logo.scale-150.png" />
+    <Content Include="images\Square310x310Logo.scale-200.png" />
+    <Content Include="images\Square310x310Logo.scale-400.png" />
+    <Content Include="images\Square44x44Logo.scale-100.png" />
+    <Content Include="images\Square44x44Logo.scale-125.png" />
+    <Content Include="images\Square44x44Logo.scale-150.png" />
     <Content Include="images\Square44x44Logo.scale-200.png" />
+    <Content Include="images\Square44x44Logo.scale-400.png" />
+    <Content Include="images\Square44x44Logo.targetsize-16.png" />
+    <Content Include="images\Square44x44Logo.targetsize-24.png" />
     <Content Include="images\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="images\StoreLogo.png" />
+    <Content Include="images\Square44x44Logo.targetsize-256.png" />
+    <Content Include="images\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Content Include="images\Square44x44Logo.targetsize-48.png" />
+    <Content Include="images\Square71x71Logo.scale-100.png" />
+    <Content Include="images\Square71x71Logo.scale-125.png" />
+    <Content Include="images\Square71x71Logo.scale-150.png" />
+    <Content Include="images\Square71x71Logo.scale-200.png" />
+    <Content Include="images\Square71x71Logo.scale-400.png" />
+    <Content Include="images\StoreLogo.scale-100.png" />
+    <Content Include="images\StoreLogo.scale-125.png" />
+    <Content Include="images\StoreLogo.scale-150.png" />
+    <Content Include="images\StoreLogo.scale-200.png" />
+    <Content Include="images\StoreLogo.scale-400.png" />
     <Content Include="images\tiles\install.png" />
     <Content Include="images\tiles\reboot.png" />
     <Content Include="images\tiles\reset.png" />
     <Content Include="images\tiles\store.png" />
+    <Content Include="images\Wide310x150Logo.scale-100.png" />
+    <Content Include="images\Wide310x150Logo.scale-125.png" />
+    <Content Include="images\Wide310x150Logo.scale-150.png" />
     <Content Include="images\Wide310x150Logo.scale-200.png" />
+    <Content Include="images\Wide310x150Logo.scale-400.png" />
     <Content Include="js\animation.js" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
@@ -94,6 +139,7 @@
     <Content Include="js\socketio.js" />
     <Content Include="js\z-worker.js" />
     <Content Include="js\zip.js" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="store.html" />
     <Content Include="menu.html" />
     <Content Include="splash.html" />

@@ -131,7 +131,7 @@ function onError(e) {
 
 HYPERGAP.CONTROLLER.onMessage = function (rawMessage) {
     console.log(rawMessage);
-    var message=rawMessage.split("%");
+    var message=rawMessage.split("~");
     switch (message[0]) {
         case "LoadLevel":
             console.log("opening level")
@@ -233,9 +233,9 @@ function startSockets() {
 
     //tempid = Math.random();
 
-    //HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer%" + tempid);
+    //HYPERGAP.CONTROLLER.sendMessage("RegisterPlayer~" + tempid);
 }
 
 HYPERGAP.CONTROLLER.sendEvent = function (evtName, evtArgs) {
-    HYPERGAP.CONTROLLER.sendMessage("ClockworkEvent" + '\u0025' + evtName + '\u0025' + JSON.stringify(evtArgs));
+    HYPERGAP.CONTROLLER.sendMessage("ClockworkEvent" + '~' + evtName + '~' + JSON.stringify(evtArgs));
 }

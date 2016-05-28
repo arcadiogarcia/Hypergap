@@ -3,6 +3,18 @@
 (function () {
     window.onload = function () {
 
+        Object.defineProperty(Array.prototype, 'recursiveForEach', {
+            enumerable: false,
+            value: function (action, index, cb) {
+                var i = index || 0;
+                if (i >= this.length) {
+                    return cb();
+                }
+                var that = this;
+                return action(this[i], function () { that.recursiveForEach(action, i + 1, cb); });
+            }
+        });
+
         var manifest = HYPERGAP.API.getManifest();
 
         document.body.style["background-color"]=manifest.backgroundColor||"black";
@@ -11,7 +23,7 @@
         //This allows to detect when all the callbacks have been executed
         HYPERGAP.presets = (function () {
             var presetList = [];
-            var remainingPresets = manifest.presets.length;
+            //var remainingPresets = manifest.presets.length;
             return {
                 push: function (x) {
                     //Array
@@ -22,10 +34,10 @@
                     if (x && x.length == undefined) {
                         presetList.push(x);
                     }
-                    remainingPresets--;
-                    if (remainingPresets == 0) {
-                        readyToGo();
-                    }
+                    //remainingPresets--;
+                    //if (remainingPresets == 0) {
+                    //    readyToGo();
+                    //}
                 },
                 getPresets: function () {
                     return presetList;
@@ -40,12 +52,24 @@
             screenbuffer_height: manifest.screenResolution.h
         };
 
-        manifest.presets.forEach(function (x) {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = HYPERGAP.API.appPath() + "/" + x;
-            document.body.appendChild(script);
-        });
+        manifest.presets.recursiveForEach(function (file, cb) {
+            var uri = new Windows.Foundation.Uri(HYPERGAP.API.appPath() + "/" + file);
+            console.log(uri);
+            var file = Windows.Storage.StorageFile.getFileFromApplicationUriAsync(uri).done( function (file) {
+                Windows.Storage.FileIO.readTextAsync(file).done(function (x) {
+                    eval(x); //Dirty AF
+                    cb();
+                });
+            }, function(x){
+                console.log(x);
+            });
+
+
+            //var script = document.createElement('script');
+            //script.type = 'text/javascript';
+            //script.src = HYPERGAP.API.appPath() + "/" + x;
+            //document.body.appendChild(script);
+        },0,readyToGo);
 
         document.getElementById("canvas").style.width = window.innerWidth;
         document.getElementById("canvas").style.height = window.innerHeight;
@@ -101,21 +125,21 @@
                         semaphorelength = manifest.controllerAssets.spritesheets.length + manifest.controllerAssets.presets.length + manifest.controllerAssets.levels.length;
                         manifest.controllerAssets.spritesheets.map(x=>"ms-appdata:///local/installedApps/" + manifest.name + "/" + manifest.scope + "/"+x).forEach(function (x) {
                             loadFileText(x, function (text) {
-                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterSpritesheet%" + text);
+                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterSpritesheet~" + text);
                                 semaphorelength--;
                                 evalSemaphore();
                             });
                         });
                         manifest.controllerAssets.presets.map(x=>"ms-appdata:///local/installedApps/" + manifest.name + "/" + manifest.scope + "/" + x).forEach(function (x) {
                             loadFileText(x, function (text) {
-                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterPreset%" + text);
+                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterPreset~" + text);
                                 semaphorelength--;
                                 evalSemaphore();
                             });
                         });
                         manifest.controllerAssets.levels.map(x=>"ms-appdata:///local/installedApps/" + manifest.name + "/" + manifest.scope + "/" + x).forEach(function (x) {
                             loadFileText(x, function (text) {
-                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterLevels%" + text);
+                                HYPERGAP.CONTROLLER.sendMessageToNewControllers("RegisterLevels~" + text);
                                 semaphorelength--;
                                 evalSemaphore();
                             });
@@ -125,7 +149,7 @@
                 evalSemaphore();
                 function evalSemaphore() {
                     if (semaphorelength == 0) {
-                        HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%" + (manifest.controller || "HyperGapMenu"));
+                        HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel~" + (manifest.controller || "HyperGapMenu"));
                     }
                 }
             });
@@ -146,16 +170,6 @@
 
         }
 
-        Object.defineProperty(Array.prototype, 'recursiveForEach', {
-            enumerable:false,
-         value:function (action, index, cb) {
-             var i = index || 0;
-             if (i >= this.length) {
-                 return cb();
-             }
-             var that = this;
-             return action(this[i], function () { that.recursiveForEach(action, i + 1,cb); });
-         }
-        });
+
     };
 })();

@@ -42,6 +42,37 @@
         </div>
     </div>
 
+    <div id="smallListIconTextTemplateStore" class="smallListIconTextTemplateStore" data-win-control="WinJS.Binding.Template" style="display: none">
+        <div class="smallListIconTextItemStore" data-win-bind="style['background-color']: color">
+            <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: picture;tileId:tileId" />
+            <div class="smallListIconTextItem-Detail">
+                <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+                <br />
+                <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+                <div>
+                    <h6 class="win-h6" style="display:inline;">Size: </h6>
+                    <h6 class="win-h6" data-win-bind="textContent: size" style="display:inline;"></h6>
+                    <h6 class="win-h6" style="display:inline;"> Mb</h6>
+                </div>
+                <div>
+                    <h6 class="win-h6" style="display:inline;">Published by: </h6>
+                    <a class="publisher" data-win-bind="textContent: publisher" href="#"></a>
+                </div>
+                <br />
+                <button data-win-bind="tileId:tileId" class="win-button installbutton" style="margin:10px;">Install</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="actionsStore" style="display:none;">
+        <button id="buttonBack" class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';">&#xe0a6;</button>
+        <input id="searchBox" class='win-textbox' type="text" style="margin:0px;flex:1;" />
+        <button id="buttonSearch" class="win-button" style="flex:0;font-family:'Segoe MDL2 Assets';">&#x1f50d;</button>
+    </div>
+    <div id="textHeaderStore" class="win-type-title" style="display:none;">
+        Top Games
+    </div>
+
     <canvas id="canvas"></canvas>
 </body>
 </html>

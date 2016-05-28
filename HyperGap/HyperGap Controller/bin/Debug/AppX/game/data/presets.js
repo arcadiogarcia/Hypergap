@@ -235,7 +235,7 @@ var game_presets = [
     name: "dpad-right",
     inherits: "generic-button",
     sprite: "dpad-right",
-    vars: [{name:"command", value:"right"}],
+    vars: [{ name: "command", value: "right" }],
     collision: {
         "box": [
             { "x": 50, "y": 0, "w": 150, "h": 150 },
@@ -246,7 +246,7 @@ var game_presets = [
     name: "dpad-left",
     inherits: "generic-button",
     sprite: "dpad-left",
-    vars: [{name:"command", value:"left"}],
+    vars: [{ name: "command", value: "left" }],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 150, "h": 150 },
@@ -299,7 +299,7 @@ var game_presets = [
     name: "a-button",
     inherits: "generic-button",
     sprite: "a-button",
-    vars: [{name:"command", value:"a-button"}],
+    vars: [{ name: "command", value: "a-button" }],
     collision: {
         "box": [
             { "x": 0, "y": 0, "w": 200, "h": 200 },
@@ -412,7 +412,7 @@ var game_presets = [
                var that = this;
                function clickTile(e) {
                    var itemArray = that.getVar("itemArray");
-                   HYPERGAP.CONTROLLER.sendMessage("MenuClick%" + e.detail.itemIndex);
+                   HYPERGAP.CONTROLLER.sendMessage("MenuClick~" + e.detail.itemIndex);
                    that.execute_event("#exit");
                }
 
@@ -436,7 +436,7 @@ var game_presets = [
         },
          {
              name: "#exit", code: function (event) {
-                 if(document.getElementById("menuDiv")){
+                 if (document.getElementById("menuDiv")) {
                      document.body.removeChild(document.getElementById("menuDiv"));
                  }
                  console.log("Im out")
@@ -449,50 +449,102 @@ var game_presets = [
     sprite: "splash",
     events: [
       {
-          name: "#collide", code: function (event) {
-              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
-                  if (event.shape2id == 0) {
-                      this.setVar("#state", "down");
+          name: "#setup", code: function (event) {
+              var that = this;
+              document.body.addEventListener("click", function () {
+                  that.setVar("#state", "progress");
+                  if (Windows.Phone) {
+                      Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
                   }
-                  if (event.shape2id == 1) {
-                      if (Windows.Phone) {
-                          Windows.Phone.Devices.Notification.VibrationDevice.getDefault().vibrate(50);
-                      }
-                      if (HYPERGAP.CONTROLLER.sendMessage) {
-                          HYPERGAP.CONTROLLER.sendMessage("b-button");
-                      }
+                  if (HYPERGAP.CONTROLLER.sendMessage) {
+                      HYPERGAP.CONTROLLER.sendMessage("startSplash");
                   }
-              }
+              });
           }
       }
-    ],
-    collision: {
-        "box": [
-            { "x": 0, "y": 0, "w": 200, "h": 200 },
-        ]
-    }
+    ]
 },
+
 {
-    name: "splashButton",
-    sprite: "splash",
+    name: "mirroredStore",
     events: [
-      {
-          name: "#collide", code: function (event) {
-              if (event.shape2kind == "point" && this.engine.getObject(event.object).instanceOf("basicMouse")) {
-                  if (event.shape2id == 1) {
-                      this.setVar("#state", "progress");
-                      if (HYPERGAP.CONTROLLER.sendMessage) {
-                          HYPERGAP.CONTROLLER.sendMessage("startSplash");
-                      }
-                  }
-              }
-          }
-      }
-    ],
-    collision: {
-        "box": [
-            { "x": 0, "y": 0, "w": 1280, "h": 720 },
-        ]
-    }
-}
+       {
+           name: "#setup", code: function (event) {
+               document.getElementById("buttonBack").addEventListener("click", function () {
+                   HYPERGAP.CONTROLLER.sendMessage("Store~BackButton");
+               });
+               document.getElementById("buttonSearch").addEventListener("click", function () {
+                   HYPERGAP.CONTROLLER.sendMessage("Store~Search~" + document.getElementById('searchBox').value);
+               });
+
+               document.getElementById("actionsStore").style.display = "block";
+               document.getElementById("textHeaderStore").style.display = "flex";
+               var element = document.createElement("div");
+               element.id = "listViewStore";
+               element.style.position = "absolute";
+               element.style.top = "120px";
+               element.style.left = "10%";
+               element.style.width = "80%";
+               element.style.height = "calc( 100% - 130px )";
+               document.body.appendChild(element);
+               var tiles = [];
+               WinJS.Namespace.define("Sample.ListView", {
+                   data: new WinJS.Binding.List(tiles)
+               });
+               var list = new WinJS.UI.ListView(element, {
+                   itemDataSource: Sample.ListView.data.dataSource,
+                   itemTemplate: document.getElementById('smallListIconTextTemplateStore'),
+                   selectionMode: 'none',
+                   layout: { type: WinJS.UI.ListLayout }
+               });
+
+           }
+       },
+        {
+            name: "LoadStore", code: function (event) {
+                var itemArray = JSON.parse(event);
+                console.log(itemArray);
+                var itemArrayCopy = itemArray.map(function (x) { return x });
+                function addTile() {
+                    if (itemArrayCopy.length > 0) {
+                        Sample.ListView.data.push(itemArrayCopy.shift());
+                        setTimeout(addTile, 50);
+                    } else {
+                        [].slice.call(document.getElementsByClassName("installbutton")).forEach(function (x) {
+                            x.addEventListener("click", function () {
+                                HYPERGAP.CONTROLLER.sendMessage("Store~Install~" + x.tileId);
+                            });
+                        });
+                        [].slice.call(document.getElementsByClassName("publisher")).forEach(function (x) {
+                            x.addEventListener("click", function () {
+                                HYPERGAP.CONTROLLER.sendMessage("Store~SearchPublisher~" + x.innerText);
+                            });
+                        });
+                    }
+                }
+                this.setVar("itemArray", itemArray);
+                while (Sample.ListView.data.length > 0) {
+                    Sample.ListView.data.pop();
+                }
+                addTile();
+
+            }
+        },
+         {
+             name: "updateTitle", code: function (event) {
+                 document.getElementById("textHeaderStore").innerText = event;
+             }
+         },
+         {
+             name: "#exit", code: function (event) {
+                 if (document.getElementById("listViewStore")) {
+                     document.body.removeChild(document.getElementById("listViewStore"));
+                 }
+                 document.getElementById("actionsStore").style.display = "none";
+                 document.getElementById("textHeaderStore").style.display = "none";
+                 console.log("Im out")
+             }
+         }
+    ]
+},
 ];

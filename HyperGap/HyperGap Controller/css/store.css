@@ -1,0 +1,62 @@
+﻿#listViewStore {
+    position:absolute;
+    left:10%;
+    top:120px;
+    width:80%;
+    height:calc( 100% - 130px );
+    padding:0px;
+}
+
+#textHeaderStore {
+    width: 80%;
+    position:absolute;
+    left:10%;
+    top:80px;
+    font-family:'Segoe UI';
+}
+
+#actionsStore {
+    width: 80%;
+    position:absolute;
+    left:10%;
+    top:20px;
+   text-align:center;
+   padding:0px;
+   display:flex;
+}
+
+/* Template for the items in the ListViews in this sample */
+.smallListIconTextItemStore {
+    width: 260px;
+    background-color: #444;
+    padding: 5px;
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    animation: tileAppear 1s;
+    padding:0px;
+}
+
+    .smallListIconTextItemStore img.smallListIconTextItem-Image {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 260px;
+        height: 200px;
+        margin: 0px;
+    }
+
+        .smallListIconTextItemStore a {
+        color:white;
+        font-family:'Segoe UI';
+        font-weight:bold;
+    }
+
+    .smallListIconTextItemStore .smallListIconTextItem-Detail {
+        /*position: absolute;
+        top:20px;
+        left: 280px;
+        width: 350px;
+        height: 55px;
+        margin-left: 10px;*/
+    }

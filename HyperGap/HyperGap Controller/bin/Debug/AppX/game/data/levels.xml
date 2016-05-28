@@ -10,7 +10,6 @@
   </level>
   <level id="HyperGapSplashScreen">
     <object name="someBG" type="splashButton" x="0" y="0" ></object>
-    <object name="someMouse" type="basicMouse" x="0" y="0" ></object>
   </level>
   <level id="HyperGapMenu">
     <object name="someBG" type="blackbg" x="0" y="0" ></object>
@@ -26,6 +25,10 @@
   <level id="HyperGapMenuMirroring">
     <object name="someBG" type="blackbg" x="0" y="0" ></object>
     <object name="mirroredMenu" type="mirroredMenu" x="0" y="0" ></object>
+  </level>
+  <level id="HyperGapStoreMirroring">
+    <object name="someBG" type="blackbg" x="0" y="0" ></object>
+    <object name="mirroredStore" type="mirroredStore" x="0" y="0" ></object>
   </level>
   <level id="game">
     <object name="mystorage" type="storage" x="0" y="0" ></object>

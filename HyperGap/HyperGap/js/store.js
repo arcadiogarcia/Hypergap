@@ -1,5 +1,5 @@
 var HYPERGAP = HYPERGAP || {};
-HYPERGAP.MENU = {};
+HYPERGAP.STORE = {};
 
 var itemArray = [];
 
@@ -9,7 +9,8 @@ WinJS.Namespace.define("Sample.ListView", {
 });
 WinJS.UI.processAll().then(function () {
     //document.getElementById("listView").winControl.addEventListener("iteminvoked", clickTile
-
+    document.getElementById("buttonBack").addEventListener("click", navigationActions.goBack);
+    document.getElementById("buttonSearch").addEventListener("click", function () { navigationActions.search(document.getElementById('searchBox').value) });
     navigationActions.topGames();
 });
 
@@ -23,7 +24,15 @@ var itemArrayCopy;
 function addTile() {
     if (itemArrayCopy.length > 0) {
         Sample.ListView.data.push(itemArrayCopy.shift());
-        setTimeout(addTile, 200);
+        setTimeout(addTile, 100);
+    } else {
+        [].slice.call(document.getElementsByClassName("installbutton")).forEach(function (x) {
+            x.addEventListener("click", function () { clickTile.apply(x) });
+        });
+        [].slice.call(document.getElementsByClassName("publisher")).forEach(function (x) {
+            x.addEventListener("click", function () { clickPublisher.apply(x) });
+        });
+
     }
 }
 
@@ -33,12 +42,17 @@ function showMenu() {
     }
     itemArrayCopy = itemArray.map(function (x) { return x });
     itemArray.forEach(function (x, id) { x.tileId = id });
+    HYPERGAP.CONTROLLER.sendMessageToNewControllers("ClockworkEvent~LoadStore~" + JSON.stringify(itemArray));
     addTile();
 }
 
-function clickTile(e) {
-    var that = this;
-    var l = itemArray.filter(function (x) { return x.tileId == that.tileId });
+function clickTile(id) {
+    if (typeof id == "undefined") {
+        var that = this;
+        var l = itemArray.filter(function (x) { return x.tileId == that.tileId });
+    } else {
+        var l = itemArray.filter(function (x) { return x.tileId == id });
+    }
     if (l.length > 0 && l[0].action) {
         l[0].action()
     }
@@ -58,15 +72,8 @@ function hideLoader() {
     document.getElementById("loadingOverlay").style.display = "none";
 }
 
-HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%HyperGapMenuMirroring");
-HYPERGAP.CONTROLLER.sendMessageToNewControllers("ClockworkEvent%LoadMenu%" + JSON.stringify(itemArray));
+HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel~HyperGapStoreMirroring");
 
-HYPERGAP.MENU.invoke = function (e) {
-    var l = itemArray.filter(function (x) { return x.tileId == e });
-    if (l.length > 0 && l[0].action) {
-        l[0].action()
-    }
-}
 
 
 
@@ -82,8 +89,14 @@ function navigateState(newstate) {
     currentState = newstate;
 }
 
+navigationActions.setTitle = function (title) {
+    HYPERGAP.CONTROLLER.sendMessageToNewControllers("ClockworkEvent~updateTitle~" + title);
+    document.getElementById("textHeader").innerHTML = title;
+}
+
 navigationActions.goBack = function () {
     if (navigationStack.length == 0) {
+        HYPERGAP.CONTROLLER.close();
         window.location = "menu.html";
     } else {
         var previous = navigationStack.pop();
@@ -96,7 +109,7 @@ navigationActions.topGames = function (args, back) {
     if (!back) {
         navigateState({ action: "topGames" });
     }
-    document.getElementById("textHeader").innerHTML = "Top Games";
+    navigationActions.setTitle("Top Games");
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -117,7 +130,7 @@ navigationActions.search = function (query, back) {
     if (!back) {
         navigateState({ action: "search", args: query });
     }
-    document.getElementById("textHeader").innerHTML = "Results for '" + query + "'";
+    navigationActions.setTitle("Results for '" + query + "'");
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -140,7 +153,7 @@ navigationActions.searchPublisher = function (p, back) {
     if (!back) {
         navigateState({ action: "searchPublisher", args: p });
     }
-    document.getElementById("textHeader").innerHTML = "Games from " + p;
+    navigationActions.setTitle("Games from " + p);
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -155,4 +168,24 @@ navigationActions.searchPublisher = function (p, back) {
     };
     httpRequest.open('GET', "http://hypergap.azurewebsites.net/API/games/publisher/" + p);
     httpRequest.send();
+}
+
+
+
+HYPERGAP.STORE.executeCommand = function (command) {
+    console.log(command);
+    switch (command[0]) {
+        case "Install":
+            clickTile(command[1]);
+            break;
+        case "SearchPublisher":
+            navigationActions.searchPublisher(command[1]);
+            break;
+        case "BackButton":
+            navigationActions.goBack();
+            break;
+        case "Search":
+            navigationActions.search(command[1]);
+            break;
+    }
 }

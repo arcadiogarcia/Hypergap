@@ -67,8 +67,8 @@ function hideLoader() {
     document.getElementById("loadingOverlay").style.display = "none";
 }
 
-HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel%HyperGapMenuMirroring");
-HYPERGAP.CONTROLLER.sendMessageToNewControllers("ClockworkEvent%LoadMenu%" + JSON.stringify(itemArray));
+HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel~HyperGapMenuMirroring");
+HYPERGAP.CONTROLLER.sendMessageToNewControllers("ClockworkEvent~LoadMenu~" + JSON.stringify(itemArray));
 
 HYPERGAP.MENU.invoke = function (e) {
     var l = itemArray.filter(function (x) { return x.tileId == e });
