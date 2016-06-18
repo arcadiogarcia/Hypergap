@@ -178,3 +178,13 @@ Array.prototype.recursiveForEach = function (action, index) {
     var that = this;
     action(this[i], function () { that.recursiveForEach(action, i + 1); });
 }
+
+function showLoader(msg, progress) {
+    document.getElementById("loadingOverlay").style.display = "block";
+    document.getElementById("loadingMessage").innerHTML = msg;
+    document.getElementById("loadingProgress").innerHTML = progress;
+}
+
+function hideLoader() {
+    document.getElementById("loadingOverlay").style.display = "none";
+}

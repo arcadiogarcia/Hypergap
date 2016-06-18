@@ -1,0 +1,27 @@
+{
+    "name": "Hello World",
+    "scope": "gameFiles",
+    "presets": [
+        "presets.js"
+    ],
+    "levels": [
+        "levels.xml"
+    ],
+    "spritesheets":[
+        "spritesheets.xml"
+    ],
+    "screenResolution": {
+        "w": 800,
+        "h": 400
+    },
+    "externalCode":[],
+    "dependencies": {
+        "presets":["mouse","storage","notificationManager","keyboard"],
+        "collisions":["pointsAndBoxes"]
+    },
+    "themeColor":"#4B5",
+    "backgroundColor":"#333",
+    "tileIcon":"tileIcon.png",
+    "enginefps": 60,
+    "animationfps": 60
+}

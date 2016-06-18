@@ -1,4 +1,4 @@
-/* jshint worker:true */
+﻿/* jshint worker:true */
 (function main(global) {
 	"use strict";
 

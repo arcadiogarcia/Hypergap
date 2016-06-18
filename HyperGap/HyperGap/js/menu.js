@@ -1,4 +1,4 @@
-var HYPERGAP = HYPERGAP || {};
+﻿var HYPERGAP = HYPERGAP || {};
 HYPERGAP.MENU = {};
 
 var itemArray = [
@@ -57,15 +57,7 @@ function clickTile(e) {
     }
 }
 
-function showLoader(msg, progress) {
-    document.getElementById("loadingOverlay").style.display = "block";
-    document.getElementById("loadingMessage").innerHTML = msg;
-    document.getElementById("loadingProgress").innerHTML = progress;
-}
 
-function hideLoader() {
-    document.getElementById("loadingOverlay").style.display = "none";
-}
 
 HYPERGAP.CONTROLLER.sendMessageToNewControllers("LoadLevel~HyperGapMenuMirroring");
 HYPERGAP.CONTROLLER.sendMessageToNewControllers("ClockworkEvent~LoadMenu~" + JSON.stringify(itemArray));

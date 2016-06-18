@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<levels>
+  <level id="mainLevel">
+    <object name="JakeTheDog" type="talkingDog" x="200" y="200" ></object>
+  </level>
+</levels>

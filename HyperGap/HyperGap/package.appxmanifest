@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="58996ARCADIOGARCA.HyperGap" Version="1.1.3.0" Publisher="CN=5F63796F-84F4-4C45-860F-616E76512FFB" />
+  <Identity Name="58996ARCADIOGARCA.HyperGap" Version="1.1.5.0" Publisher="CN=5F63796F-84F4-4C45-860F-616E76512FFB" />
   <mp:PhoneIdentity PhoneProductId="7055c652-d8a7-48df-b025-f57677e22673" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>HyperGap</DisplayName>
@@ -26,6 +26,11 @@
         <uap:Rule Match="https://archive.org/" Type="include" WindowsRuntimeAccess="none" />
         <uap:Rule Match="https://www.bing.com/" Type="include" WindowsRuntimeAccess="none" />
       </uap:ApplicationContentUriRules>
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="com.hypergap.deploy" />
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 
 <head>
     <meta name="msapplication-cortanavcd" content="xml/cortana.xml" />
@@ -8,15 +8,23 @@
     src: url('fonts/Xolonium-Bold.otf');
 }
         </style>
+    <link href="css/menu.css" rel="stylesheet" />
     <script src="js/zip.js"></script>
     <script src="js/hypergap_apps.js"></script>
     <script src="js/socketio.js"></script>
     <script src="js/networkDiscovery.js"></script>
+    <script src="WinJS/js/base.js"></script>
+    <script src="WinJS/js/ui.js"></script>
 </head>
 
 <body style="margin:0px;overflow:hidden;background:black;">
     <canvas id="canvas" style="width:100%;height:100%;position:absolute;top:0px;left:0px;"></canvas>
     <script src="js/animation.js"></script>
+    <script src="js/default.js"></script>
+    <div id="loadingOverlay">
+        <div id="loadingMessage">Copying game files</div>
+        <div id="loadingProgress">2/20</div>
+    </div>
 </body>
 
 </html>

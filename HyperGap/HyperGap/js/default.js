@@ -6,7 +6,10 @@
 	var app = WinJS.Application;
 	var activation = Windows.ApplicationModel.Activation;
 
+
+
 	app.onactivated = function (args) {
+
 		if (args.detail.kind === activation.ActivationKind.launch) {
 			if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
 				// TODO: This application has been newly launched. Initialize your application here.
@@ -15,6 +18,9 @@
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
 			}
 			args.setPromise(WinJS.UI.processAll());
+		}
+		if (args.detail.kind === activation.ActivationKind.protocol) {
+		    HYPERGAP.apps.installGameFromURL(args.detail.uri.rawUri.replace(args.detail.uri.schemeName,"http"), function () { HYPERGAP.CONTROLLER.close(); location = "menu.html"; });
 		}
 	};
 

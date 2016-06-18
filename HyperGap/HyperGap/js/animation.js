@@ -1,4 +1,4 @@
-var HYPERGAP = HYPERGAP || {};
+﻿var HYPERGAP = HYPERGAP || {};
 HYPERGAP.SPLASH = {};
 
 
