@@ -1,6 +1,6 @@
 {
-    "name": "Flappy Ninja Cat",
-    "scope": "gamefiles",
+    "name": "Pong",
+    "scope": "gameFiles",
     "presets": [
         "presets.js"
     ],
@@ -11,8 +11,8 @@
         "spritesheets.xml"
     ],
     "screenResolution": {
-        "w": 800,
-        "h": 400
+        "w": 320,
+        "h": 200
     },
     "externalCode":[],
     "dependencies": {
@@ -20,7 +20,7 @@
         "collisions":["pointsAndBoxes"]
     },
     "themeColor":"#4B5",
-    "backgroundColor":"#333",
+    "backgroundColor":"#000",
     "tileIcon":"tileIcon.png",
     "enginefps": 60,
     "animationfps": 60

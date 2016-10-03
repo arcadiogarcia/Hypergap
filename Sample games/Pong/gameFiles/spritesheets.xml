@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <spritesheets>
+  <spritesheet name="bar" src="images/white.png">
+
+    <states>
+      <state name="idle">
+        <layer name="idle"></layer>
+      </state>
+      <state name="lost">
+        <layer name="lost"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="idle" x="-2" y="-10">
+        <frame name="bar"></frame>
+      </layer>   
+      <layer name="lost" x="-2" y="-10">
+        <frame name="bar"></frame>
+        <frame name="smallBar"></frame>
+      </layer>   
+    </layers>
+
+    <frames>
+      <frame name="bar" x="0" y="0" w="5" h="20" t="200"></frame>
+      <frame name="smallBar" x="0" y="0" w="1" h="20" t="200"></frame>
+    </frames>
+
+  </spritesheet>
+
+  <spritesheet name="ball" src="images/white.png">
+
+    <states>
+      <state name="idle">
+        <layer name="idle"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="idle" x="0" y="0">
+        <frame name="ball"></frame>
+      </layer>   
+    </layers>
+
+    <frames>
+      <frame name="ball" x="0" y="0" w="4" h="4" t="100"></frame>
+    </frames>
+
+  </spritesheet>
+
+
+    <spritesheet name="score" >
+
+    <states>
+      <state name="idle">
+        <layer name="idle"></layer>
+      </state>
+    </states>
+
+    <layers>
+      <layer name="idle" x="0" y="0">
+        <frame name="score"></frame>
+      </layer>   
+    </layers>
+
+    <frames>
+      <frame name="score" x="0" y="0" code="context.beginPath();context.fillStyle = '#FFF';context.font = '20pt Courier';context.textAlign = 'center';context.fillText(vars['$player']+' / '+vars['$AI'],x,y);" t="0"></frame>
+    </frames>
+
+  </spritesheet>
+
+  </spritesheets>

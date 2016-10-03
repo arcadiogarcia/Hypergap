@@ -90,6 +90,9 @@ var Spritesheet = (function () {
             if (object.state != undefined) {
                 state = searchWhere(spritesheet.states, "name", object.state);
             }
+            if (!state) {
+                continue;
+            }
             //We loop over the layers of its current state
             for (var j in state.layers) {
                 //In case it was modified before, we reset the alpha

@@ -41,6 +41,15 @@ HYPERGAP.presets.push([
                 }
             },
             {
+                name: "gamepadDown", code: function(event) {
+                    if(this.getVar("alive") == true && event.name=="A"){
+                         this.setVar("#state", "BarkR");
+                            this.setVar("vy", -8);
+                            this.setVar("timer", 28);
+                    }
+                }
+            },
+            {
                 name: "#loop", code: function(event) {
                     if (this.getVar("#x") < 100) {
                         this.setVar("#x", this.getVar("#x") + 5);
@@ -198,6 +207,18 @@ HYPERGAP.presets.push([
                         this.engine.loadLevelByID("game");
                     }
                     if (event.key == 66) {
+                        if (HYPERGAP) {
+                            HYPERGAP.API.loadMenu();
+                        }
+                    }
+                }
+            },
+            {
+                name: "gamepadUp", code: function(event) {
+                    if(event.name=="A"){
+                        this.engine.loadLevelByID("game");
+                    }
+                    if(event.name=="B"){
                         if (HYPERGAP) {
                             HYPERGAP.API.loadMenu();
                         }

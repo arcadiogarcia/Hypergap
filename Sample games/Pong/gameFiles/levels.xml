@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<levels>
+  <level id="mainLevel">
+    <object name="playerBar" type="playerBar" x="20" y="100" z="0" vars="{}"/>
+    <object name="enemyBar" type="enemyBar" x="295" y="100" z="0" vars="{}"/>
+    <object name="ball" type="ball" x="160" y="50" z="0" vars="{}"/>
+    <object name="score" type="score" x="160" y="25" z="0" vars="{}"/>
+
+    <object name="keyboard" type="keyboard" x="0" y="0" z="0" vars="{}"/>
+    <object name="gamepad" type="gamepad" x="0" y="0"/>
+  </level>
+</levels>
